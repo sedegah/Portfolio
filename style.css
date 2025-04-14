@@ -136,7 +136,18 @@ h1 {
 .contact-email:hover {
   color: #8c3bff;
 }
-
+.fa-kaggle {
+  font-family: 'Space Mono', monospace;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 2.5rem;
+  content: "K";
+  color: #8c3bff; 
+  .skill-item i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #8c3bff;
+}
 .section {
   padding: 4rem;
   margin: 0 auto;
