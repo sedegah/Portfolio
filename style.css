@@ -196,6 +196,11 @@ h1 {
   gap: 2rem;
   margin-top: 2rem;
 }
+.custom-skill-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 5px;
+}
 
 .skill-item {
   display: flex;
