@@ -1,4 +1,17 @@
+.contact-phone {
+  color: #333;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  transition: color 0.3s;
+}
 
+body.dark-mode .contact-phone {
+  color: #fff;
+}
+
+.contact-phone:hover {
+  color: #8c3bff;
+}
 * {
   margin: 0;
   padding: 0;
