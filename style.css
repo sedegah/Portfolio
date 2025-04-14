@@ -1,12 +1,11 @@
-
 body {
   font-family: 'Space Mono', monospace;
   background: #f7f3f3;
   min-height: 100vh;
   color: #333;
-  margin: 0 auto;  /* This centers the content */
-  max-width: 1400px;  /* Or whatever maximum width you prefer */
-  padding: 0 2rem;  /* Adds space on both sides */
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 2rem;
 }
 body.dark-mode .contact-phone {
   color: #fff;
@@ -119,27 +118,6 @@ h1 {
   color: #8c3bff;
 }
 
-.contact-section {
-  text-align: center;
-  padding: 4rem;
-}
-
-.contact-section h2 {
-  margin-bottom: 2rem;
-  color: #2d2d2d;
-}
-
-.contact-email {
-  color: #333;
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: color 0.3s;
-}
-
-.contact-email:hover {
-  color: #8c3bff;
-}
-}
 .section {
   padding: 4rem;
   margin: 0 auto;
@@ -196,6 +174,7 @@ h1 {
   gap: 2rem;
   margin-top: 2rem;
 }
+
 .custom-skill-icon {
   width: 32px;
   height: 32px;
@@ -212,134 +191,7 @@ h1 {
   border-radius: 10px;
   transition: transform 0.3s ease;
 }
-<section id="color-changer" class="section">
-  <h2>Change Background Color</h2>
-  <button id="change-color-button">Change Color</button>
-</section>body.dark-mode {
-  background: #1a1a1a;
-  color: #fff; /* Make all text white in dark mode */
-}
 
-body.dark-mode .contact-email,
-body.dark-mode .bio,
-body.dark-mode .location,
-body.dark-mode .skills,
-body.dark-mode .section h2 {
-  color: #fff; /* Ensure specific elements are white in dark mode */
-}
-
-body.dark-mode .nav-links a {
-  color: #fff; /* Change navigation link color */
-}
-
-body.dark-mode .cta-button {
-  background: #333; /* Optional change for call to action button */
-}
-
-body.dark-mode .cert-item,
-body.dark-mode .experience-item,
-body.dark-mode .education-item,
-body.dark-mode .project-item {
-  background: rgba(255, 255, 255, 0.1); /* Adjust backgrounds for dark mode items */
-}// Function to toggle dark mode
-function toggleDarkMode() {
-  const body = document.body;
-  body.classList.toggle('dark-mode');
-
-  const button = document.getElementById('toggle-dark-mode');
-  if (body.classList.contains('dark-mode')) {
-    button.textContent = 'Switch to Light Mode';
-  } else {
-    button.textContent = 'Switch to Dark Mode';
-  }
-}
-
-// Event listener for button click
-document.addEventListener('DOMContentLoaded', () => {
-  const button = document.getElementById('toggle-dark-mode');
-  button.addEventListener('click', toggleDarkMode);
-});<section id="dark-mode-toggle" class="section">
-  <h2>Toggle Dark Mode</h2>
-  <button id="toggle-dark-mode">Switch to Dark Mode</button>
-</section>// Function to toggle dark mode
-function toggleDarkMode() {
-  const body = document.body;
-  body.classList.toggle('dark-mode');
-
-  const button = document.getElementById('toggle-dark-mode');
-  if (body.classList.contains('dark-mode')) {
-    button.textContent = 'Switch to Light Mode';
-  } else {
-    button.textContent = 'Switch to Dark Mode';
-  }
-}
-
-// Event listener for button click
-document.addEventListener('DOMContentLoaded', () => {
-  const button = document.getElementById('toggle-dark-mode');
-  button.addEventListener('click', toggleDarkMode);
-});body.dark-mode {
-  background: #1a1a1a;
-  color: #fff; /* Make all text white in dark mode */
-}
-
-body.dark-mode .contact-email,
-body.dark-mode .bio,
-body.dark-mode .location,
-body.dark-mode .skills,
-body.dark-mode .section h2,
-body.dark-mode .nav-links a {
-  color: #fff; /* Ensure specific elements are white in dark mode */
-}
-
-body.dark-mode .cta-button {
-  background: #333; /* Optionally change the call to action button */
-}/* Dark Mode button styling */
-.moon-button {
-  background: none; /* No background */
-  border: none; /* Remove border */
-  font-size: 1.5rem; /* Increase emoji size */
-  cursor: pointer; /* Pointer cursor */
-  transition: transform 0.3s ease; /* Smooth transformation */
-  margin-left: 1.5in; /* Move the button to the left by 1 inch */
-}
-
-.moon-button:hover {
-  transform: scale(1.2); /* Slightly enlarge the button on hover */
-}
-
-/* Dark Mode Background and Text Colors */
-body.dark-mode {
-  background: #1a1a1a; /* Dark background */
-  color: #fff; /* Text color becomes white */
-}
-
-body.dark-mode .contact-email,
-body.dark-mode .bio,
-body.dark-mode .location,
-body.dark-mode .skills,
-body.dark-mode .section h2,
-body.dark-mode .nav-links a {
-  color: #fff; /* Ensure specific elements are white in dark mode */
-}
-
-body.dark-mode .cta-button {
-  background: #333; /* Optionally change the call-to-action button */
-}
-
-body.dark-mode .cert-item,
-body.dark-mode .experience-item,
-body.dark-mode .education-item,
-body.dark-mode .project-item {
-  background: rgba(255, 255, 255, 0.1); /* Adjust backgrounds for dark mode items */
-}.moon-button {
-  background: none; /* No background */
-  border: none; /* Remove border */
-  font-size: 1.5rem; /* Increase emoji size */
-  cursor: pointer; /* Pointer cursor */
-  transition: transform 0.3s ease; /* Smooth transformation */
-  margin-left: 2in; /* Move the button by 2 inches */
-}
 .skill-item:hover {
   transform: translateY(-5px);
   background: rgba(140, 59, 255, 0.2);
@@ -394,33 +246,6 @@ body.dark-mode .project-item {
   transform: translateX(100%);
 }
 
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 2rem;
-  }
-  
-  nav {
-    padding: 1rem 2rem;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  .nav-links a {
-    margin-left: 0;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-}
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -454,7 +279,12 @@ body.dark-mode .project-item {
   color: #8c3bff;
   text-decoration: none;
   font-weight: bold;
-} 
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
 .contact-phone {
   color: #333;
   font-size: 1.2rem;
@@ -462,6 +292,97 @@ body.dark-mode .project-item {
   transition: color 0.3s;
 }
 
-.project-link:hover {
-  text-decoration: underline;
+/* ✨ New: Contact Info Section */
+.contact-section {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.contact-info a {
+  display: block;
+  margin: 1rem auto;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-info a:hover {
+  color: #8c3bff;
+}
+
+body.dark-mode .contact-info a {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+
+  nav {
+    padding: 1rem 2rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    margin-left: 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .contact-info a {
+    font-size: 1rem;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+body.dark-mode .contact-email,
+body.dark-mode .bio,
+body.dark-mode .location,
+body.dark-mode .skills,
+body.dark-mode .section h2,
+body.dark-mode .nav-links a {
+  color: #fff;
+}
+
+body.dark-mode .cta-button {
+  background: #333;
+}
+
+body.dark-mode .cert-item,
+body.dark-mode .experience-item,
+body.dark-mode .education-item,
+body.dark-mode .project-item {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark Mode Button */
+.moon-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-left: 2in;
+}
+
+.moon-button:hover {
+  transform: scale(1.2);
 }
