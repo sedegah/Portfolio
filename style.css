@@ -1,10 +1,13 @@
-.contact-phone {
-  color: #333;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  transition: color 0.3s;
-}
 
+body {
+  font-family: 'Space Mono', monospace;
+  background: #f7f3f3;
+  min-height: 100vh;
+  color: #333;
+  margin: 0 auto;  /* This centers the content */
+  max-width: 1400px;  /* Or whatever maximum width you prefer */
+  padding: 0 2rem;  /* Adds space on both sides */
+}
 body.dark-mode .contact-phone {
   color: #fff;
 }
@@ -446,6 +449,12 @@ body.dark-mode .project-item {
   color: #8c3bff;
   text-decoration: none;
   font-weight: bold;
+} 
+.contact-phone {
+  color: #333;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  transition: color 0.3s;
 }
 
 .project-link:hover {
