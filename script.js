@@ -1,4 +1,4 @@
-// script.js (without Load More Projects feature)
+// script.js
 
 // ===== Dark Mode with Local Storage =====
 const darkModeToggle = document.getElementById('toggle-dark-mode');
@@ -70,8 +70,8 @@ document.querySelectorAll('.skill-item').forEach(item => {
   item.addEventListener('mouseenter', () => {
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
-      icon.style.transform = 'scale(1.2) rotate(10deg)';
-      icon.style.color = '#8c3bff';
+      icon.style.transform = 'scale(1.1)';
+      icon.style.transition = 'transform 0.3s ease';
     }
   });
   
@@ -79,26 +79,20 @@ document.querySelectorAll('.skill-item').forEach(item => {
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
       icon.style.transform = '';
-      icon.style.color = '';
     }
   });
 });
 
-// ===== Project Card Tilt Effect =====
+// ===== Project Card Hover Effect =====
 document.querySelectorAll('.project-item').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const x = e.clientX - card.getBoundingClientRect().left;
-    const y = e.clientY - card.getBoundingClientRect().top;
-    const centerX = card.offsetWidth / 2;
-    const centerY = card.offsetHeight / 2;
-    const angleX = (y - centerY) / 20;
-    const angleY = (centerX - x) / 20;
-    
-    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'translateY(-5px)';
+    card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
   });
   
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
+    card.style.boxShadow = '';
   });
 });
 
@@ -125,9 +119,11 @@ const animateProgressBars = () => {
   document.querySelectorAll('.progress-fill').forEach(bar => {
     const width = bar.style.width;
     bar.style.width = '0';
+    bar.style.transition = 'width 0s'; // Reset transition for initial animation
     setTimeout(() => {
       bar.style.width = width;
-    }, 300);
+      bar.style.transition = 'width 1.5s ease-out'; // Smooth animation
+    }, 50);
   });
 };
 
@@ -233,7 +229,11 @@ style.textContent = `
   }
   
   .project-item {
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .progress-fill {
+    transition: width 1.5s ease-out !important;
   }
 `;
 document.head.appendChild(style);
@@ -245,7 +245,7 @@ function initParticles() {
   canvas.style.top = '0';
   canvas.style.left = '0';
   canvas.style.zIndex = '-1';
-  canvas.style.opacity = '0.3';
+  canvas.style.opacity = '0.15';
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');
@@ -253,21 +253,21 @@ function initParticles() {
   canvas.height = window.innerHeight;
 
   const particles = [];
-  const particleCount = window.innerWidth / 5;
+  const particleCount = Math.min(window.innerWidth / 4, 150);
 
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 3 + 1,
+      size: Math.random() * 2 + 1,
       speedX: Math.random() * 1 - 0.5,
-      speedY: Math.random() * 1 - 0.5
+      speedY: Math.random() * 1 - 0.5,
+      color: `hsla(${Math.random() * 60 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
     });
   }
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#8c3bff';
     
     particles.forEach(p => {
       p.x += p.speedX;
@@ -276,6 +276,7 @@ function initParticles() {
       if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
       if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
       
+      ctx.fillStyle = p.color;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
