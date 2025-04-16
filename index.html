@@ -1,14 +1,18 @@
-<!DOCTYPE html>  
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Kimathi Sedegah - Tech Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kimathi Sedegah – Tech Developer</title>
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link href="style.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+
+<body class="dark-mode">
   <nav>
     <div class="logo">kimathi sedegah<span>.</span></div>
     <div class="nav-links">
@@ -21,19 +25,25 @@
   </nav>
 
   <!-- Dark mode toggle -->
-  <button id="toggle-dark-mode" class="moon-button" aria-label="Toggle Dark Mode">🌙</button>
+  <button
+    id="toggle-dark-mode"
+    class="moon-button"
+    aria-label="Switch to Light Mode"
+  >☀️</button>
 
   <main class="hero">
     <div class="hero-content">
       <div class="greeting">👋 Hi, I'm Kimathi!</div>
-      <h1>Tech Developer | Creating Innovative Solutions for Real-World Challenges</h1>
-      <p class="bio">I am a passionate and driven tech enthusiast specializing in Python, JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda. Currently pursuing a degree at the University of Ghana with a focus on AI & Cloud computing.</p>
+      <h1>Tech Developer | Creating Innovative Solutions for Real‑World Challenges</h1>
+      <p class="bio">
+        I am a passionate and driven tech enthusiast specializing in Python, JavaScript,
+        PHP, SQL, and cloud technologies like Docker and Anaconda. Currently pursuing a degree
+        at the University of Ghana with a focus on AI & Cloud computing.
+      </p>
     </div>
     <div class="hero-image">
       <img src="images/profile.jpg" alt="Profile">
-      <div class="floating-badge">
-        tech development & AI
-      </div>
+      <div class="floating-badge">tech development & AI</div>
     </div>
   </main>
 
@@ -48,24 +58,43 @@
       <div class="skill-item"><i class="fab fa-aws"></i><span>Cloud</span></div>
       <div class="skill-item"><i class="fab fa-java"></i><span>Java</span></div>
       <div class="skill-item"><i class="fab fa-cuttlefish"></i><span>C++</span></div>
-      <div class="skill-item"><i class="fas fa-code"></i><span>C#</span></div> <!-- Updated C# icon -->
+      <div class="skill-item"><i class="fas fa-code"></i><span>C#</span></div>
       <div class="skill-item"><i class="fas fa-cogs"></i><span>Kubernetes</span></div>
       <div class="skill-item"><i class="fab fa-react"></i><span>React.js</span></div>
+      <!-- New Data Analysis Skill -->
+      <div class="skill-item">
+        <img
+          id="data-analysis-icon"
+          class="custom-skill-icon"
+          src="images/icons/data-analysis-dark.svg"
+          alt="Data Analysis"
+        />
+        <span>Data Analysis</span>
+      </div>
     </div>
   </section>
 
   <section id="about" class="section">
     <h2>About Me</h2>
     <p>Aspiring Software Developer | AI & Cloud Enthusiast | Student at the University of Ghana</p>
-    <p>I am a passionate and driven tech enthusiast currently pursuing a degree at the University of Ghana (2024–2027). With a strong foundation in programming, I have developed skills in Python, JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda.</p>
-    <p>Beyond academics, I actively contribute to the tech community as a Student Volunteer at Google Developer Group, where I engage in AI, machine learning, and cloud computing initiatives. I am always eager to learn, collaborate, and explore opportunities in software development, cloud computing, and AI. Let’s connect and share ideas.</p>
+    <p>
+      I am a passionate and driven tech enthusiast currently pursuing a degree at the University
+      of Ghana (2024–2027). With a strong foundation in programming, I have developed skills in
+      Python, JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda.
+    </p>
+    <p>
+      Beyond academics, I actively contribute to the tech community as a Student Volunteer at Google
+      Developer Group, where I engage in AI, machine learning, and cloud computing initiatives.
+      I am always eager to learn, collaborate, and explore opportunities in software development,
+      cloud computing, and AI. Let’s connect and share ideas.
+    </p>
   </section>
 
   <section id="experience" class="section">
     <h2>Experience</h2>
     <div class="experience-item">
-      <h3>Student Volunteer - Google Developers Group</h3>
-      <p class="duration">Dec 2024 - Jan 2025 · 2 mos</p>
+      <h3>Student Volunteer – Google Developers Group</h3>
+      <p class="duration">Dec 2024 – Jan 2025 · 2 mos</p>
       <p class="location">Ghana · Remote</p>
       <p>Google Developer Group AI & Machine Learning Jam Session</p>
       <p class="skills">Skills: Anaconda, Docker</p>
@@ -76,12 +105,12 @@
     <h2>Education</h2>
     <div class="education-item">
       <h3>University of Ghana</h3>
-      <p class="duration">2024 - 2027</p>
+      <p class="duration">2024 – 2027</p>
       <p class="skills">Focus: Statistics, Computer Science</p>
     </div>
     <div class="education-item">
       <h3>Presbyterian Boys' Senior High School</h3>
-      <p class="duration">Mar 2021 - Sep 2023</p>
+      <p class="duration">Mar 2021 – Sep 2023</p>
       <p>High School Diploma, Biology/Biological Sciences</p>
     </div>
   </section>
@@ -89,12 +118,12 @@
   <section id="certifications" class="section">
     <h2>Certifications</h2>
     <div class="cert-grid">
-      <div class="cert-item">Introduction to IoT and Digital Transformation - Cisco</div>
-      <div class="cert-item">Electronic Arts - Software Engineering Job Simulation</div>
-      <div class="cert-item">Java Fundamentals - HackerRank</div>
-      <div class="cert-item">Operating Systems Fundamentals - Cisco</div>
+      <div class="cert-item">Introduction to IoT and Digital Transformation – Cisco</div>
+      <div class="cert-item">Electronic Arts – Software Engineering Job Simulation</div>
+      <div class="cert-item">Java Fundamentals – HackerRank</div>
+      <div class="cert-item">Operating Systems Fundamentals – Cisco</div>
       <div class="cert-item">Principles of Agentic Code Development</div>
-      <div class="cert-item">Python for Data Science and AI Development - IBM</div>
+      <div class="cert-item">Python for Data Science and AI Development – IBM</div>
     </div>
   </section>
 
@@ -102,29 +131,36 @@
     <h2>Projects</h2>
     <div class="project-grid">
       <div class="project-item">
-        <h3>GigaRandoBot - Telegram Random Number Generator Bot</h3>
-        <p class="duration">Dec 2024 - Present</p>
-        <p>GigaRandoBot is a Telegram bot that generates random numbers within specified ranges, offering both custom and quick pick options. It’s ideal for games, lotteries, or any application requiring randomization.</p>
+        <h3>GigaRandoBot – Telegram Random Number Generator Bot</h3>
+        <p class="duration">Dec 2024 – Present</p>
+        <p>
+          GigaRandoBot is a Telegram bot that generates random numbers within specified ranges,
+          offering both custom and quick pick options. It’s ideal for games, lotteries, or any
+          application requiring randomization.
+        </p>
         <p><a href="https://t.me/gigarandobot" class="project-link">View Project</a></p>
-        <p>Skills: Application Programming Interfaces (API) · Software Deployment · Telegram Bot API · Project Management</p>
-      </div> 
+        <p>
+          Skills: Application Programming Interfaces (API) · Software Deployment · Telegram Bot API
+          · Project Management
+        </p>
+      </div>
+    </div>
   </section>
 
- <section id="contact" class="contact-section">
-  <h2>Let's Talk</h2>
-  <div class="contact-info">
-    <a href="mailto:sedegahkimathi@gmail.com" class="contact-email">
-      <i class="fas fa-envelope"></i> sedegahkimathi@gmail.com
-    </a>
-    <a href="tel:+233209253226" class="contact-phone">
-      <i class="fas fa-phone"></i> +233209253226
-    </a>
-    <a href="https://www.linkedin.com/in/kimathi-sedegah-227a40347" target="_blank" class="contact-linkedin">
-      <i class="fab fa-linkedin"></i> linkedin.com/in/kimathi-sedegah-227a40347
-    </a>
-  </div>
-</section>
-
+  <section id="contact" class="contact-section">
+    <h2>Let's Talk</h2>
+    <div class="contact-info">
+      <a href="mailto:sedegahkimathi@gmail.com" class="contact-email">
+        <i class="fas fa-envelope"></i> sedegahkimathi@gmail.com
+      </a>
+      <a href="tel:+233209253226" class="contact-phone">
+        <i class="fas fa-phone"></i> +233209253226
+      </a>
+      <a href="https://www.linkedin.com/in/kimathi-sedegah-227a40347" target="_blank" class="contact-linkedin">
+        <i class="fab fa-linkedin"></i> linkedin.com/in/kimathi-sedegah-227a40347
+      </a>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
