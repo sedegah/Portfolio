@@ -305,3 +305,49 @@ const particleCount = Math.min(window.innerWidth / 3, 200);
 // For faster movement:
 speedX: Math.random() * 2 - 1,
 speedY: Math.random() * 2 - 1,
+
+
+
+  // ===== Dynamic Text for Projects Section =====
+const dynamicText = document.querySelector('.dynamic-text');
+if (dynamicText) {
+  const words = [
+    "That Solve Problems", 
+    "That Make a Difference",
+    "I'm Proud Of",
+    "With Modern Tech",
+    "That Push Boundaries"
+  ];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 200;
+
+  function typeEffect() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      dynamicText.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 100;
+    } else {
+      dynamicText.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 200;
+    }
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      isDeleting = true;
+      typeSpeed = 1500; // Pause at end of word
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typeSpeed = 500; // Pause before next word
+    }
+
+    setTimeout(typeEffect, typeSpeed);
+  }
+
+  // Start the effect after a brief delay
+  setTimeout(typeEffect, 1000);
+}
