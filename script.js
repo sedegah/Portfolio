@@ -1,128 +1,173 @@
 // script.js
 
-// Dark Mode Toggle
+// ===== Dark Mode with Local Storage =====
 const darkModeToggle = document.getElementById('toggle-dark-mode');
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+let darkMode = localStorage.getItem('darkMode') === 'true';
 
-// Check for saved user preference or use system preference
-let darkMode = localStorage.getItem('darkMode') === 'true' || 
-               (localStorage.getItem('darkMode') === null && prefersDarkScheme.matches);
-
-// Apply initial mode
-updateDarkMode();
-
-// Toggle dark mode
-darkModeToggle.addEventListener('click', () => {
-  darkMode = !darkMode;
-  localStorage.setItem('darkMode', darkMode);
-  updateDarkMode();
-});
-
-function updateDarkMode() {
+function applyDarkMode() {
   document.body.classList.toggle('dark-mode', darkMode);
   darkModeToggle.textContent = darkMode ? '☀️' : '🌙';
   darkModeToggle.setAttribute('aria-label', darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode');
 }
 
-// Smooth scrolling for anchor links
+darkModeToggle.addEventListener('click', () => {
+  darkMode = !darkMode;
+  localStorage.setItem('darkMode', darkMode);
+  applyDarkMode();
+});
+
+applyDarkMode();
+
+// ===== Smooth Scrolling with Offset =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    const targetId = this.getAttribute('href');
-    const targetElement = document.querySelector(targetId);
-    
-    if (targetElement) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
       window.scrollTo({
-        top: targetElement.offsetTop - 80,
+        top: target.offsetTop - 80,
         behavior: 'smooth'
       });
-      
-      // Update URL without page jump
-      history.pushState(null, null, targetId);
     }
   });
 });
 
-// Animate progress bars when they come into view
-const progressBars = document.querySelectorAll('.progress-fill');
-const observerOptions = {
-  threshold: 0.5
+// ===== Animate Elements on Scroll =====
+const animateOnScroll = () => {
+  const elements = document.querySelectorAll('.section, .skill-item, .project-item');
+  elements.forEach(el => {
+    const elTop = el.getBoundingClientRect().top;
+    if (elTop < window.innerHeight - 100) {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }
+  });
 };
 
-const progressObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const width = entry.target.style.width;
-      entry.target.style.width = '0';
-      setTimeout(() => {
-        entry.target.style.width = width;
-      }, 100);
-    }
-  });
-}, observerOptions);
-
-progressBars.forEach(bar => {
-  progressObserver.observe(bar);
+// Set initial state for animation
+document.querySelectorAll('.section, .skill-item, .project-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 });
 
-// Add hover effect to project items
-const projectItems = document.querySelectorAll('.project-item');
-projectItems.forEach(item => {
+window.addEventListener('scroll', animateOnScroll);
+animateOnScroll(); // Run once on load
+
+// ===== Floating Badge Animation =====
+const floatingBadge = document.querySelector('.floating-badge');
+if (floatingBadge) {
+  setInterval(() => {
+    floatingBadge.style.transform = 'translateY(-5px)';
+    setTimeout(() => {
+      floatingBadge.style.transform = 'translateY(0)';
+    }, 1000);
+  }, 2000);
+}
+
+// ===== Skill Item Hover Effects =====
+document.querySelectorAll('.skill-item').forEach(item => {
   item.addEventListener('mouseenter', () => {
-    item.style.transform = 'translateY(-5px)';
-    item.style.boxShadow = '0 10px 25px rgba(140, 59, 255, 0.3)';
+    const icon = item.querySelector('i, .custom-skill-icon');
+    if (icon) {
+      icon.style.transform = 'scale(1.2) rotate(10deg)';
+      icon.style.color = '#8c3bff';
+    }
   });
   
   item.addEventListener('mouseleave', () => {
-    item.style.transform = '';
-    item.style.boxShadow = '';
+    const icon = item.querySelector('i, .custom-skill-icon');
+    if (icon) {
+      icon.style.transform = '';
+      icon.style.color = '';
+    }
   });
 });
 
-// Form submission handling (if you add a contact form later)
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Here you would add your form submission logic
-    console.log('Form submitted!');
-    // Example: Send data to a server or email service
+// ===== Project Card Tilt Effect =====
+document.querySelectorAll('.project-item').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const x = e.clientX - card.getBoundingClientRect().left;
+    const y = e.clientY - card.getBoundingClientRect().top;
+    const centerX = card.offsetWidth / 2;
+    const centerY = card.offsetHeight / 2;
+    const angleX = (y - centerY) / 20;
+    const angleY = (centerX - x) / 20;
+    
+    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
   });
+  
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ===== Typewriter Effect for Hero Text =====
+const heroText = document.querySelector('.hero-content h1');
+if (heroText) {
+  const originalText = heroText.textContent;
+  heroText.textContent = '';
+  let i = 0;
+  
+  const typeWriter = () => {
+    if (i < originalText.length) {
+      heroText.textContent += originalText.charAt(i);
+      i++;
+      setTimeout(typeWriter, Math.random() * 50 + 30);
+    }
+  };
+  
+  setTimeout(typeWriter, 1000);
 }
 
-// Dynamic year update for footer (if you add one)
-const yearElement = document.getElementById('current-year');
+// ===== Progress Bar Animation =====
+const animateProgressBars = () => {
+  document.querySelectorAll('.progress-fill').forEach(bar => {
+    const width = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => {
+      bar.style.width = width;
+    }, 300);
+  });
+};
+
+// Run when progress bars are visible
+const progressObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateProgressBars();
+      progressObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.progress-container').forEach(container => {
+  progressObserver.observe(container);
+});
+
+// ===== Dynamic Copyright Year =====
+const yearElement = document.getElementById('copyright-year');
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
 
-// Scroll to top button
-const scrollToTopButton = document.createElement('button');
-scrollToTopButton.innerHTML = '↑';
-scrollToTopButton.id = 'scroll-to-top';
-scrollToTopButton.setAttribute('aria-label', 'Scroll to top');
-document.body.appendChild(scrollToTopButton);
+// ===== Scroll to Top Button =====
+const scrollToTopBtn = document.createElement('button');
+scrollToTopBtn.innerHTML = '↑';
+scrollToTopBtn.id = 'scroll-to-top';
+scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
+document.body.appendChild(scrollToTopBtn);
 
 window.addEventListener('scroll', () => {
-  if (window.pageYOffset > 300) {
-    scrollToTopButton.style.opacity = '1';
-    scrollToTopButton.style.visibility = 'visible';
-  } else {
-    scrollToTopButton.style.opacity = '0';
-    scrollToTopButton.style.visibility = 'hidden';
-  }
+  scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
 });
 
-scrollToTopButton.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+scrollToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Tooltip for skills (enhanced)
-const skillItems = document.querySelectorAll('.skill-item');
-skillItems.forEach(skill => {
+// ===== Tooltip for Skills =====
+document.querySelectorAll('.skill-item').forEach(skill => {
   const tooltip = document.createElement('div');
   tooltip.className = 'skill-tooltip';
   tooltip.textContent = skill.querySelector('span').textContent;
@@ -139,31 +184,7 @@ skillItems.forEach(skill => {
   });
 });
 
-// Active navigation link highlighting
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-window.addEventListener('scroll', () => {
-  let current = '';
-  
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    
-    if (pageYOffset >= sectionTop - 200) {
-      current = section.getAttribute('id');
-    }
-  });
-  
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
-      link.classList.add('active');
-    }
-  });
-});
-
-// Add this CSS for new elements (you can add to your style.css)
+// ===== Add CSS for new elements =====
 const style = document.createElement('style');
 style.textContent = `
   #scroll-to-top {
@@ -177,25 +198,21 @@ style.textContent = `
     color: white;
     border: none;
     cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
+    display: none;
+    opacity: 0.9;
     transition: all 0.3s ease;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(140, 59, 255, 0.3);
-    z-index: 99;
+    z-index: 100;
   }
   
   #scroll-to-top:hover {
-    background: #7a2be8;
+    opacity: 1;
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(140, 59, 255, 0.4);
   }
   
   .skill-tooltip {
     position: absolute;
-    bottom: -30px;
+    bottom: -35px;
     left: 50%;
     transform: translateX(-50%);
     background: #333;
@@ -210,9 +227,13 @@ style.textContent = `
     z-index: 10;
   }
   
-  .nav-links a.active {
-    color: #8c3bff !important;
-    font-weight: bold;
+  body.dark-mode .skill-tooltip {
+    background: #fff;
+    color: #333;
+  }
+  
+  .project-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   }
 `;
 document.head.appendChild(style);
