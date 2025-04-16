@@ -28,16 +28,14 @@ body.dark-mode {
   color: #fff;
 }
 
-body.dark-mode .contact-phone {
-  color: #fff;
-}
-
 body.dark-mode .contact-info a,
 body.dark-mode .bio,
 body.dark-mode .location,
 body.dark-mode .skills,
 body.dark-mode .section h2,
-body.dark-mode .nav-links a {
+body.dark-mode .nav-links a,
+body.dark-mode .progress-label,
+body.dark-mode .contact-phone {
   color: #fff;
 }
 
@@ -49,7 +47,9 @@ body.dark-mode .cta-button {
 body.dark-mode .cert-item,
 body.dark-mode .experience-item,
 body.dark-mode .education-item,
-body.dark-mode .project-item {
+body.dark-mode .project-item,
+body.dark-mode .section,
+body.dark-mode #programming-languages {
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -72,10 +72,14 @@ nav {
   color: #8c3bff;
 }
 
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
 .nav-links a {
   color: #333;
   text-decoration: none;
-  margin-left: 2.5rem;
   font-size: 0.9rem;
   transition: color 0.3s;
 }
@@ -93,7 +97,11 @@ nav {
   color: white !important;
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #7a2be8;
 }
 
 /*----------------------------------------------
@@ -105,7 +113,6 @@ nav {
   gap: 4rem;
   padding: 4rem;
   align-items: center;
-  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -143,48 +150,48 @@ h1 {
   box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
+/*----------------------------------------------
+  FLOATING BADGE (Tech Development & AI)
+-----------------------------------------------*/
 .floating-badge {
   position: absolute;
   bottom: -20px;
   right: -20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   padding: 1rem 2rem;
   border-radius: 50px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.05);
   font-size: 0.9rem;
   color: #8c3bff;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 body.dark-mode .floating-badge {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 /*----------------------------------------------
-  SECTIONS
+  ABOUT ME SECTION
 -----------------------------------------------*/
-.section {
-  padding: 4rem;
+#about {
+  padding: 3rem 4rem;
   margin: 0 auto 2rem;
   max-width: 1400px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  transition: background 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-body.dark-mode .section {
-  background: rgba(26,26,26,0.8);
+#about p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 800px;
 }
 
-.section h2 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  background: linear-gradient(45deg, #fff, #8c3bff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+body.dark-mode #about {
+  background: rgba(26, 26, 26, 0.8);
 }
 
 /*----------------------------------------------
@@ -212,12 +219,12 @@ body.dark-mode .section {
 }
 
 .location {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(51, 51, 51, 0.7);
   margin-bottom: 1rem;
 }
 
 .skills {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(51, 51, 51, 0.7);
   font-size: 0.9rem;
   margin-top: 1rem;
 }
@@ -248,30 +255,14 @@ body.dark-mode .section {
   background: rgba(140, 59, 255, 0.2);
 }
 
-.skill-item i,
-.skill-item img {
+.skill-item i {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   color: #8c3bff;
 }
 
-/* Data Analysis uses Font Awesome icon, no broken image */
-.skill-item .fa-chart-line {
-  font-size: 2.5rem;
-  color: #8c3bff;
-}
-
 .skill-item span {
   font-size: 0.9rem;
-}
-
-/*----------------------------------------------
-  CUSTOM SKILL ICON
------------------------------------------------*/
-.custom-skill-icon {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 5px;
 }
 
 /*----------------------------------------------
@@ -289,31 +280,12 @@ body.dark-mode .section {
   border-radius: 10px;
   transition: all 0.3s ease;
   border: 1px solid rgba(140, 59, 255, 0.2);
-  backdrop-filter: blur(5px);
-  position: relative;
-  overflow: hidden;
 }
 
 .cert-item:hover {
   background: rgba(140, 59, 255, 0.2);
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.cert-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: translateX(-100%);
-  transition: 0.5s;
-}
-
-.cert-item:hover::before {
-  transform: translateX(100%);
 }
 
 /*----------------------------------------------
@@ -344,18 +316,13 @@ body.dark-mode .section {
   margin-bottom: 1rem;
 }
 
-.project-item p {
-  margin-bottom: 1rem;
-}
-
 .project-link {
   color: #8c3bff;
   text-decoration: none;
   font-weight: bold;
 }
 
-.project-link:hover,
-.project-link:focus {
+.project-link:hover {
   text-decoration: underline;
 }
 
@@ -376,23 +343,8 @@ body.dark-mode .section {
   transition: color 0.3s;
 }
 
-.contact-info a:hover,
-.contact-info a:focus {
+.contact-info a:hover {
   color: #8c3bff;
-}
-
-/*----------------------------------------------
-  PHONE LINK
------------------------------------------------*/
-.contact-phone {
-  color: #333;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  transition: color 0.3s;
-}
-
-body.dark-mode .contact-phone {
-  color: #fff;
 }
 
 /*----------------------------------------------
@@ -402,24 +354,8 @@ body.dark-mode .contact-phone {
   padding: 4rem;
   margin: 0 auto 2rem;
   max-width: 1400px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  transition: background 0.3s ease;
-}
-
-body.dark-mode #programming-languages {
-  background: rgba(26,26,26,0.8);
-}
-
-#programming-languages h2 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  background: linear-gradient(45deg, #fff, #8c3bff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .progress-container {
@@ -429,11 +365,6 @@ body.dark-mode #programming-languages {
 .progress-label {
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #333;
-}
-
-body.dark-mode .progress-label {
-  color: #fff;
 }
 
 .progress-bar {
@@ -442,24 +373,18 @@ body.dark-mode .progress-label {
   background: rgba(241, 238, 238, 0.3);
   border-radius: 6px;
   overflow: hidden;
-  transition: background 0.3s ease;
-}
-
-body.dark-mode .progress-bar {
-  background: rgba(255,255,255,0.2);
 }
 
 .progress-fill {
   height: 100%;
   background: #8c3bff;
-  transition: width 0.6s ease, background 0.3s ease;
 }
 
 body.dark-mode .progress-fill {
   background: #fff;
 }
 
-/* Example proficiency widths */
+/* Proficiency levels */
 .progress-java .progress-fill { width: 75%; }
 .progress-python .progress-fill { width: 60%; }
 .progress-htmlcss .progress-fill { width: 85%; }
@@ -477,41 +402,32 @@ body.dark-mode .progress-fill {
   font-size: 1.5rem;
   cursor: pointer;
   transition: transform 0.3s ease;
-  margin-left: 2in;
+  margin-left: 2rem;
 }
 
-.moon-button:hover,
-.moon-button:focus {
+.moon-button:hover {
   transform: scale(1.2);
-  outline: 2px dashed #8c3bff;
 }
 
 /*----------------------------------------------
-  MOBILE RESPONSIVE ADJUSTMENTS
+  MOBILE RESPONSIVENESS
 -----------------------------------------------*/
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
     padding: 1.5rem 1rem;
-    align-items: flex-start;
   }
 
   .nav-links {
-    display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;
     width: 100%;
   }
 
-  .nav-links a {
-    margin-left: 0;
-  }
-
   .hero {
     grid-template-columns: 1fr;
     padding: 2rem 1rem;
-    gap: 2rem;
   }
 
   .hero-content {
@@ -522,11 +438,6 @@ body.dark-mode .progress-fill {
     font-size: 2rem;
   }
 
-  .bio {
-    font-size: 1rem;
-    max-width: 100%;
-  }
-
   .hero-image img {
     height: auto;
   }
@@ -535,9 +446,13 @@ body.dark-mode .progress-fill {
     position: static;
     margin-top: 1rem;
     text-align: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .section,
+  #about,
   #programming-languages {
     padding: 2rem 1rem;
   }
@@ -557,382 +472,3 @@ body.dark-mode .progress-fill {
     align-self: flex-end;
   }
 }
-
-
-/*----------------------------------------------
-  ADDITIONAL BLANK LINES TO MEET 417+ LINES REQUIREMENT
------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
