@@ -484,6 +484,73 @@ body.dark-mode .progress-fill {
 .moon-button:focus {
   transform: scale(1.2);
   outline: 2px dashed #8c3bff;
+}    
+/*----------------------------------------------
+  ABOUT ME SECTION - WITH ROUNDED PADDING CONTAINER
+-----------------------------------------------*/
+#about {
+  padding: 3rem 4rem;
+  margin: 0 auto 2rem;
+  max-width: 1400px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  transition: background 0.3s ease;
+  overflow: hidden; /* Ensures child elements respect border radius */
+}
+
+#about .content-container {
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px; /* Rounded edges for inner padding */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #about .content-container {
+  background: rgba(26, 26, 26, 0.3);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/*----------------------------------------------
+  PROGRAMMING LANGUAGES SECTION - WITH ROUNDED PADDING CONTAINER
+-----------------------------------------------*/
+#programming-languages {
+  padding: 3rem 4rem;
+  margin: 0 auto 2rem;
+  max-width: 1400px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  transition: background 0.3s ease;
+  overflow: hidden;
+}
+
+#programming-languages .content-container {
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #programming-languages .content-container {
+  background: rgba(26, 26, 26, 0.3);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.progress-container {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .progress-container {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.progress-container:hover {
+  background: rgba(140, 59, 255, 0.1);
 }
 
 /*----------------------------------------------
