@@ -4,18 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kimathi Sedegah – Tech Developer</title>
-
-  <!-- Original Space Mono font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link href="style.css" rel="stylesheet" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="dark-mode">
@@ -26,23 +17,17 @@
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#certifications">Certifications</a>
+      <a href="#projects">Projects</a>
       <a href="#contact" class="cta-button">Let's talk</a>
     </div>
   </nav>
 
-  <!-- Dark mode toggle -->
-  <button
-    id="toggle-dark-mode"
-    class="moon-button"
-    aria-label="Switch to Light Mode"
-  >☀️</button>
+  <button id="toggle-dark-mode" class="moon-button" aria-label="Switch to Light Mode">☀️</button>
 
   <main class="hero">
     <div class="hero-content">
       <div class="greeting">👋 Hi, I'm Kimathi!</div>
-      <h1>
-        Tech Developer | Creating Innovative Solutions for Real‑World Challenges
-      </h1>
+      <h1>Tech Developer | Creating Innovative Solutions for Real-World Challenges</h1>
       <p class="bio">
         I am a passionate and driven tech enthusiast specializing in Python,
         JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda.
@@ -70,16 +55,9 @@
       <div class="skill-item"><i class="fas fa-code"></i><span>C#</span></div>
       <div class="skill-item"><i class="fas fa-cogs"></i><span>Kubernetes</span></div>
       <div class="skill-item"><i class="fab fa-react"></i><span>React.js</span></div>
-
-      <!-- FIXED Data Analysis Skill -->
-      <div class="skill-item">
-        <i class="fas fa-chart-line"></i>
-        <span>Data Analysis</span>
-      </div>
+      <div class="skill-item"><i class="fas fa-chart-line"></i><span>Data Analysis</span></div>
     </div>
   </section>
-
-  <!-- (other sections unchanged: About, Experience, Education, Certifications, Projects, Contact) -->
 
   <section id="programming-languages" class="section">
     <h2>Programming Languages</h2>
@@ -110,6 +88,83 @@
     <div class="progress-container progress-csharp">
       <div class="progress-label">C#</div>
       <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>Aspiring Software Developer | AI & Cloud Enthusiast | Student at the University of Ghana</p>
+    <p>I am a passionate and driven tech enthusiast currently pursuing a degree at the University of Ghana (2024–2027). With a strong foundation in programming, I have developed skills in Python, JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda.</p>
+    <p>Beyond academics, I actively contribute to the tech community as a Student Volunteer at Google Developer Group, where I engage in AI, machine learning, and cloud computing initiatives. I am always eager to learn, collaborate, and explore opportunities in software development, cloud computing, and AI. Let’s connect and share ideas.</p>
+  </section>
+
+  <section id="experience" class="section">
+    <h2>Experience</h2>
+    <div class="experience-item">
+      <h3>Student Volunteer - Google Developers Group</h3>
+      <p class="duration">Dec 2024 - Jan 2025 · 2 mos</p>
+      <p class="location">Ghana · Remote</p>
+      <p>Google Developer Group AI & Machine Learning Jam Session</p>
+      <p class="skills">Skills: Anaconda, Docker</p>
+    </div>
+  </section>
+
+  <section id="education" class="section">
+    <h2>Education</h2>
+    <div class="education-item">
+      <h3>University of Ghana</h3>
+      <p class="duration">2024 - 2027</p>
+      <p class="skills">Focus: Statistics, Computer Science</p>
+    </div>
+    <div class="education-item">
+      <h3>Presbyterian Boys' Senior High School</h3>
+      <p class="duration">Mar 2021 - Sep 2023</p>
+      <p>High School Diploma, Biology/Biological Sciences</p>
+    </div>
+  </section>
+
+  <section id="certifications" class="section">
+    <h2>Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-item">Introduction to IoT and Digital Transformation - Cisco</div>
+      <div class="cert-item">Electronic Arts - Software Engineering Job Simulation</div>
+      <div class="cert-item">Java Fundamentals - HackerRank</div>
+      <div class="cert-item">Operating Systems Fundamentals - Cisco</div>
+      <div class="cert-item">Principles of Agentic Code Development</div>
+      <div class="cert-item">Python for Data Science and AI Development - IBM</div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-item">
+        <h3>LegonAttend – QR Code-Based Attendance System</h3>
+        <p class="duration">In Development</p>
+        <p>QR code–based tool for lecturers and event organizers, featuring unique session codes, real-time tracking, and mobile-first design.</p>
+        <p><a href="https://legonattend.vercel.app" class="project-link">Visit Project</a></p>
+      </div>
+      <div class="project-item">
+        <h3>GigaRandoBot – Telegram Random Number Generator Bot</h3>
+        <p class="duration">Dec 2024 – Present</p>
+        <p>Generates random numbers within specified ranges, offering custom and quick-pick options for games and lotteries.</p>
+        <p><a href="https://t.me/gigarandobot" class="project-link">View Project</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2>Let's Talk</h2>
+    <div class="contact-info">
+      <a href="mailto:sedegahkimathi@gmail.com" class="contact-email">
+        <i class="fas fa-envelope"></i> sedegahkimathi@gmail.com
+      </a>
+      <a href="tel:+233209253226" class="contact-phone">
+        <i class="fas fa-phone"></i> +233209253226
+      </a>
+      <a href="https://www.linkedin.com/in/kimathi-sedegah-227a40347" target="_blank" class="contact-linkedin">
+        <i class="fab fa-linkedin"></i> www.linkedin.com/in/kimathi-sedegah-71b853360
+      </a>
     </div>
   </section>
 
