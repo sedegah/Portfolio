@@ -293,4 +293,15 @@ function initParticles() {
 }
 
 // Initialize particles
-initParticles();
+initParticles(); // For more purple particles:
+color: `hsla(${Math.random() * 30 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
+
+// For larger particles:
+size: Math.random() * 3 + 1,
+
+// For more particles (up to 200):
+const particleCount = Math.min(window.innerWidth / 3, 200);
+
+// For faster movement:
+speedX: Math.random() * 2 - 1,
+speedY: Math.random() * 2 - 1,
