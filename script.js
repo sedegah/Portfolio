@@ -1,4 +1,4 @@
-// script.js
+// script.js (without Load More Projects feature)
 
 // ===== Dark Mode with Local Storage =====
 const darkModeToggle = document.getElementById('toggle-dark-mode');
@@ -70,8 +70,8 @@ document.querySelectorAll('.skill-item').forEach(item => {
   item.addEventListener('mouseenter', () => {
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
-      icon.style.transform = 'scale(1.1)';
-      icon.style.transition = 'transform 0.3s ease';
+      icon.style.transform = 'scale(1.2) rotate(10deg)';
+      icon.style.color = '#8c3bff';
     }
   });
   
@@ -79,20 +79,26 @@ document.querySelectorAll('.skill-item').forEach(item => {
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
       icon.style.transform = '';
+      icon.style.color = '';
     }
   });
 });
 
-// ===== Project Card Hover Effect =====
+// ===== Project Card Tilt Effect =====
 document.querySelectorAll('.project-item').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    card.style.transform = 'translateY(-5px)';
-    card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+  card.addEventListener('mousemove', (e) => {
+    const x = e.clientX - card.getBoundingClientRect().left;
+    const y = e.clientY - card.getBoundingClientRect().top;
+    const centerX = card.offsetWidth / 2;
+    const centerY = card.offsetHeight / 2;
+    const angleX = (y - centerY) / 20;
+    const angleY = (centerX - x) / 20;
+    
+    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
   });
   
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
-    card.style.boxShadow = '';
   });
 });
 
@@ -121,8 +127,7 @@ const animateProgressBars = () => {
     bar.style.width = '0';
     setTimeout(() => {
       bar.style.width = width;
-      bar.style.transition = 'width 1s ease-out';
-    }, 100);
+    }, 300);
   });
 };
 
@@ -228,11 +233,63 @@ style.textContent = `
   }
   
   .project-item {
-    transition: all 0.3s ease !important;
-  }
-  
-  .progress-fill {
-    transition: width 1s ease-out !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   }
 `;
 document.head.appendChild(style);
+
+// ===== Animated Background Particles =====
+function initParticles() {
+  const canvas = document.createElement('canvas');
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.zIndex = '-1';
+  canvas.style.opacity = '0.3';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  const particleCount = window.innerWidth / 5;
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3 + 1,
+      speedX: Math.random() * 1 - 0.5,
+      speedY: Math.random() * 1 - 0.5
+    });
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#8c3bff';
+    
+    particles.forEach(p => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+      
+      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    requestAnimationFrame(animateParticles);
+  }
+  
+  animateParticles();
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+
+// Initialize particles
+initParticles();
