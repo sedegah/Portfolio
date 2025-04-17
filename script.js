@@ -7,15 +7,12 @@ const darkModeToggle = {
   },
 
   loadPreference() {
-    // Check local storage first, then system preference
     const storedPref = localStorage.getItem('darkMode');
     const systemPrefDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (storedPref === null) {
-      // No stored preference, use system preference
       this.setDarkMode(systemPrefDark);
     } else {
-      // Use stored preference
       this.setDarkMode(storedPref === 'true');
     }
   },
@@ -23,9 +20,8 @@ const darkModeToggle = {
   setupEventListeners() {
     this.toggleBtn.addEventListener('click', () => this.toggle());
     
-    // Watch for system preference changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('darkMode')) { // Only respond if no manual preference set
+      if (!localStorage.getItem('darkMode')) {
         this.setDarkMode(e.matches);
       }
     });
@@ -50,7 +46,6 @@ const darkModeToggle = {
     this.toggleBtn.innerHTML = isDark ? '☀️' : '🌙';
     this.toggleBtn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
     
-    // Optional: Update other elements that need dark mode changes
     document.querySelectorAll('[data-dark-mode]').forEach(el => {
       el.style.display = isDark ? 'block' : 'none';
     });
@@ -68,9 +63,7 @@ function initializeParticles() {
           value_area: 800
         }
       },
-      color: {
-        value: "#ffffff"
-      },
+      color: { value: "#ffffff" },
       shape: {
         type: "circle",
         stroke: {
@@ -165,17 +158,12 @@ function dynamicTextChange() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Dark Mode Toggle
   darkModeToggle.init();
   
-  // Optional: Add smooth transition after load to prevent flash
   setTimeout(() => {
     document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
   }, 100);
 
-  // Initialize Particles.js
   initializeParticles();
-  
-  // Initialize Dynamic Text
   dynamicTextChange();
 });
