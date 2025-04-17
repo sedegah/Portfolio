@@ -226,6 +226,60 @@ document.querySelectorAll('.progress-container').forEach(container => {
   fill.style.width = '0';
   
   progressObserver.observe(container);
+}); 
+// ===== Programming Languages Progress Bars =====
+const languageSkills = {
+  'progress-java': '85%',
+  'progress-python': '75%',
+  'progress-htmlcss': '90%',
+  'progress-php': '70%',
+  'progress-sql': '80%',
+  'progress-cpp': '65%',
+  'progress-csharp': '60%'
+};
+
+const animateLanguageProgress = () => {
+  document.querySelectorAll('.progress-container').forEach(container => {
+    const containerClass = Array.from(container.classList).find(cls => cls.startsWith('progress-'));
+    const targetWidth = languageSkills[containerClass];
+    const fill = container.querySelector('.progress-fill');
+    
+    // Set initial state
+    fill.style.width = '0';
+    fill.style.transition = 'none';
+    
+    // Animate to target width
+    setTimeout(() => {
+      fill.style.width = targetWidth;
+      fill.style.transition = 'width 1.5s cubic-bezier(0.22, 0.61, 0.36, 1)';
+      
+      // Add percentage text
+      const percentText = document.createElement('span');
+      percentText.className = 'progress-percent';
+      percentText.textContent = targetWidth;
+      container.querySelector('.progress-bar').appendChild(percentText);
+      
+      // Animate percentage text
+      setTimeout(() => {
+        percentText.style.opacity = '1';
+        percentText.style.transform = 'translateX(0)';
+      }, 1500);
+    }, 100);
+  });
+};
+
+// Run when progress bars are visible
+const languageProgressObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateLanguageProgress();
+      languageProgressObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('#programming-languages .progress-container').forEach(container => {
+  languageProgressObserver.observe(container);
 });
 
 // ===== Dynamic Copyright Year =====
