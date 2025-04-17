@@ -132,125 +132,7 @@ if (heroText) {
   setTimeout(typePhrase, 1000);
 }
 
-// ===== Progress Bar Animation =====
-const animateProgressBars = () => {
-  document.querySelectorAll('.progress-fill').forEach(bar => {
-    const width = bar.style.width;
-    bar.style.width = '0';
-    bar.style.transition = 'width 0s';
-    setTimeout(() => {
-      bar.style.width = width;
-      bar.style.transition = 'width 1.5s ease-out';
-    }, 50);
-  });
-};
-
-const progressObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateProgressBars();
-      progressObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.progress-container').forEach(container => {
-  progressObserver.observe(container);
-});
-
-// ===== Dynamic Copyright Year =====
-const yearElement = document.getElementById('copyright-year');
-if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
-}
-
-// ===== Scroll to Top Button =====
-const scrollToTopBtn = document.createElement('button');
-scrollToTopBtn.innerHTML = '↑';
-scrollToTopBtn.id = 'scroll-to-top';
-scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
-document.body.appendChild(scrollToTopBtn);
-
-window.addEventListener('scroll', () => {
-  scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ===== Tooltip for Skills =====
-document.querySelectorAll('.skill-item').forEach(skill => {
-  const tooltip = document.createElement('div');
-  tooltip.className = 'skill-tooltip';
-  tooltip.textContent = skill.querySelector('span').textContent;
-  skill.appendChild(tooltip);
-
-  skill.addEventListener('mouseenter', () => {
-    tooltip.style.opacity = '1';
-    tooltip.style.visibility = 'visible';
-  });
-
-  skill.addEventListener('mouseleave', () => {
-    tooltip.style.opacity = '0';
-    tooltip.style.visibility = 'hidden';
-  });
-});
-
-// ===== Add CSS for new elements =====
-const style = document.createElement('style');
-style.textContent = `
-  #scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #8c3bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    display: none;
-    opacity: 0.9;
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-  #scroll-to-top:hover {
-    opacity: 1;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(140, 59, 255, 0.4);
-  }
-  .skill-tooltip {
-    position: absolute;
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    z-index: 10;
-  }
-  body.dark-mode .skill-tooltip {
-    background: #fff;
-    color: #333;
-  }
-  .project-item {
-    transition: all 0.3s ease !important;
-  }
-  .progress-fill {
-    transition: width 1.5s ease-out !important;
-  }
-`;
-document.head.appendChild(style);
-
-// ===== Animated Background Particles =====
+// ===== Particle Animation using Canvas =====
 function initParticles() {
   const canvas = document.createElement('canvas');
   canvas.style.position = 'fixed';
@@ -274,13 +156,13 @@ function initParticles() {
       size: Math.random() * 2 + 1,
       speedX: Math.random() * 1 - 0.5,
       speedY: Math.random() * 1 - 0.5,
-      color: `hsla(${Math.random() * 60 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
+      color: 'hsla(' + (Math.random() * 60 + 270) + ', 80%, 60%, ' + (Math.random() * 0.3 + 0.1) + ')'
     });
   }
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
     particles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
@@ -306,3 +188,42 @@ function initParticles() {
 
 // Initialize particles
 initParticles();
+
+// ===== Scroll to Top Button =====
+const scrollToTopBtn = document.createElement('button');
+scrollToTopBtn.innerHTML = '↑';
+scrollToTopBtn.id = 'scroll-to-top';
+scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
+document.body.appendChild(scrollToTopBtn);
+
+window.addEventListener('scroll', () => {
+  scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+});
+
+scrollToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ===== Dynamic Copyright Year =====
+const yearElement = document.getElementById('copyright-year');
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
+
+// ===== Tooltip for Skills =====
+document.querySelectorAll('.skill-item').forEach(skill => {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'skill-tooltip';
+  tooltip.textContent = skill.querySelector('span').textContent;
+  skill.appendChild(tooltip);
+
+  skill.addEventListener('mouseenter', () => {
+    tooltip.style.opacity = '1';
+    tooltip.style.visibility = 'visible';
+  });
+
+  skill.addEventListener('mouseleave', () => {
+    tooltip.style.opacity = '0';
+    tooltip.style.visibility = 'hidden';
+  });
+});
