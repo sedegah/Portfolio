@@ -206,11 +206,52 @@ const animateProgressBars = () => {
       percentText.textContent = targetWidth + '%';
       container.appendChild(percentText);
       
+     const animateProgressBars = () => {
+  document.querySelectorAll('.progress-container').forEach(container => {
+    const skillName = container.dataset.skill;
+    const targetWidth = container.dataset.percent;
+
+    let fill = container.querySelector('.progress-fill');
+    if (!fill) {
+      fill = document.createElement('div');
+      fill.className = 'progress-fill';
+      container.appendChild(fill);
+    }
+
+    // Reset and style fill
+    fill.style.width = '0';
+    fill.style.transition = 'none';
+
+    // Remove any existing percentage text
+    const existingPercent = container.querySelector('.progress-percent');
+    if (existingPercent) {
+      existingPercent.remove();
+    }
+
+    // Animate to target width
+    setTimeout(() => {
+      fill.style.width = targetWidth + '%';
+      fill.style.transition = 'width 1.5s cubic-bezier(0.22, 0.61, 0.36, 1)';
+
+      // Add percentage text
+      const percentText = document.createElement('span');
+      percentText.className = 'progress-percent';
+      percentText.textContent = targetWidth + '%';
+      percentText.style.position = 'absolute';
+      percentText.style.right = '10px';
+      percentText.style.top = '50%';
+      percentText.style.transform = 'translateY(-50%)';
+      percentText.style.color = darkMode ? '#fff' : '#333';
+      percentText.style.fontWeight = 'bold';
+      percentText.style.opacity = '0';
+      percentText.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      container.appendChild(percentText);
+
       // Animate percentage text
       setTimeout(() => {
         percentText.style.opacity = '1';
-        percentText.style.transform = 'translateX(0)';
-      }, 1500);
+        percentText.style.transform = 'translateY(-50%) translateX(0)';
+      }, 500);
     }, 100);
   });
 };
