@@ -186,6 +186,80 @@ body.dark-mode .section {
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
+/* Core Competencies Section */
+.skills-categories {
+  padding: 4rem 2rem;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.category-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0;
+  transform: translateY(20px);
+  border: 1px solid rgba(140, 59, 255, 0.2);
+}
+
+.category-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  background: rgba(140, 59, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.category-card i {
+  font-size: 2.5rem;
+  color: #8c3bff;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover i {
+  transform: scale(1.1);
+}
+
+.category-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #8c3bff;
+}
+
+.category-card p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Dark Mode */
+body.dark-mode .category-card {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .category-card p {
+  color: #aaa;
+}
+
+body.dark-mode .category-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /*----------------------------------------------
   EXPERIENCE & EDUCATION ITEMS
