@@ -71,7 +71,7 @@ document.querySelectorAll('.skill-item').forEach(item => {
       icon.style.transition = 'transform 0.3s ease';
     }
   });
-  
+
   item.addEventListener('mouseleave', () => {
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
@@ -86,7 +86,7 @@ document.querySelectorAll('.project-item').forEach(card => {
     card.style.transform = 'translateY(-5px)';
     card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
   });
-  
+
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
     card.style.boxShadow = '';
@@ -100,7 +100,7 @@ if (heroText) {
     'I build web experiences.',
     'JavaScript is my playground.',
     'Let’s create something amazing!',
-    'Hi, I’m Kimathi Sedegah.'
+    'Tech Developer | Creating Innovative Solutions for Real-World Challenges'
   ];
 
   let phraseIndex = 0;
@@ -122,6 +122,7 @@ if (heroText) {
     } else {
       if (phraseIndex === phrases.length - 1 && !isDeleting) {
         isFinal = true;
+        heroText.textContent = phrases[phraseIndex];
         return;
       }
       isDeleting = !isDeleting;
@@ -185,12 +186,12 @@ document.querySelectorAll('.skill-item').forEach(skill => {
   tooltip.className = 'skill-tooltip';
   tooltip.textContent = skill.querySelector('span').textContent;
   skill.appendChild(tooltip);
-  
+
   skill.addEventListener('mouseenter', () => {
     tooltip.style.opacity = '1';
     tooltip.style.visibility = 'visible';
   });
-  
+
   skill.addEventListener('mouseleave', () => {
     tooltip.style.opacity = '0';
     tooltip.style.visibility = 'hidden';
@@ -280,7 +281,7 @@ function initParticles() {
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     particles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
