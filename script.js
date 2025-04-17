@@ -294,3 +294,35 @@ function initParticles() {
 
 // Initialize particles
 initParticles();
+// Create particles
+  const particles = [];
+  const particleCount = Math.min(width * height / 5000, 150);
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  // Animation loop
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    
+    particles.forEach(particle => {
+      particle.update();
+      particle.draw();
+    });
+    
+    requestAnimationFrame(animate);
+  }
+
+  // Handle resize
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // Start animation
+  animate();
+}
+
+// Initialize particles
+initParticles();
