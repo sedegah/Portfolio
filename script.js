@@ -71,7 +71,7 @@ document.querySelectorAll('.skill-item').forEach(item => {
       icon.style.transition = 'transform 0.3s ease';
     }
   });
-
+  
   item.addEventListener('mouseleave', () => {
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
@@ -86,27 +86,27 @@ document.querySelectorAll('.project-item').forEach(card => {
     card.style.transform = 'translateY(-5px)';
     card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
   });
-
+  
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
     card.style.boxShadow = '';
   });
 });
 
-// ===== Dynamic Typewriter Effect with Multiple Phrases =====
+// ===== Typewriter Effect for Hero Text =====
 const heroText = document.querySelector('.hero-content h1');
-
 if (heroText) {
   const phrases = [
-    'Hi, I’m [Your Name].',
     'I build web experiences.',
     'JavaScript is my playground.',
-    'Let’s create something amazing!'
+    'Let’s create something amazing!',
+    'Hi, I’m Kimathi Sedegah.'
   ];
 
   let phraseIndex = 0;
   let letterIndex = 0;
   let isDeleting = false;
+  let isFinal = false;
 
   function typePhrase() {
     const currentPhrase = phrases[phraseIndex];
@@ -120,12 +120,15 @@ if (heroText) {
       letterIndex--;
       setTimeout(typePhrase, Math.random() * 40 + 20);
     } else {
+      if (phraseIndex === phrases.length - 1 && !isDeleting) {
+        isFinal = true;
+        return;
+      }
       isDeleting = !isDeleting;
-      if (!isDeleting) phraseIndex = (phraseIndex + 1) % phrases.length;
+      if (!isDeleting) phraseIndex++;
       setTimeout(typePhrase, 1000);
     }
   }
-
   setTimeout(typePhrase, 1000);
 }
 
@@ -182,12 +185,12 @@ document.querySelectorAll('.skill-item').forEach(skill => {
   tooltip.className = 'skill-tooltip';
   tooltip.textContent = skill.querySelector('span').textContent;
   skill.appendChild(tooltip);
-
+  
   skill.addEventListener('mouseenter', () => {
     tooltip.style.opacity = '1';
     tooltip.style.visibility = 'visible';
   });
-
+  
   skill.addEventListener('mouseleave', () => {
     tooltip.style.opacity = '0';
     tooltip.style.visibility = 'hidden';
@@ -213,13 +216,11 @@ style.textContent = `
     transition: all 0.3s ease;
     z-index: 100;
   }
-
   #scroll-to-top:hover {
     opacity: 1;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(140, 59, 255, 0.4);
   }
-
   .skill-tooltip {
     position: absolute;
     bottom: -35px;
@@ -236,32 +237,15 @@ style.textContent = `
     white-space: nowrap;
     z-index: 10;
   }
-
   body.dark-mode .skill-tooltip {
     background: #fff;
     color: #333;
   }
-
   .project-item {
     transition: all 0.3s ease !important;
   }
-
   .progress-fill {
     transition: width 1.5s ease-out !important;
-  }
-
-  .hero-content h1 {
-    min-height: 3em;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid #8c3bff;
-    animation: blink 0.75s step-end infinite;
-  }
-
-  @keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: #8c3bff; }
   }
 `;
 document.head.appendChild(style);
@@ -296,7 +280,7 @@ function initParticles() {
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
     particles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
@@ -320,4 +304,5 @@ function initParticles() {
   });
 }
 
+// Initialize particles
 initParticles();
