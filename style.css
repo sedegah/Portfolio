@@ -680,6 +680,21 @@ body.dark-mode .no-link {
 
 body.dark-mode .dynamic-text {
   color: #b07aff;
+}  .progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #8c3bff, #b07aff);
+  width: 0;
+}
+
+.progress-percent {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #333;
+  font-weight: bold;
+  opacity: 0;
 }
 
 /*----------------------------------------------
