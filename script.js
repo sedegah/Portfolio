@@ -465,7 +465,10 @@ function debounce(func, wait) {
       func.apply(context, args);
     }, wait);
   };
-}
+}   
+this.size = Math.random() * 12 + 4; // 4-16px range
+this.size = this.baseSize + Math.sin(Date.now() * this.pulseSpeed) * (this.baseSize * 0.5);
+gradient.addColorStop(0, `hsla(${this.colorAngle}, 100%, 90%, ${this.opacity})`);
 
 // Initialize larger particles
 initParticles();
