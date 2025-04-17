@@ -473,4 +473,4 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Initialize particles
-initParticles();
+initParticles(); this.size = Math.random() * 4 + 2; // Change these numbers to make bigger
