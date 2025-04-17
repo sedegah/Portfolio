@@ -311,6 +311,29 @@ function initParticles() {
   }
 
   animateParticles();
+
+
+
+  // Animate competency cards on scroll
+const competencyCards = document.querySelectorAll('.category-card');
+
+function checkScroll() {
+  competencyCards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < window.innerHeight - 100) {
+      card.classList.add('visible');
+    }
+  });
+}
+
+// Initial animation setup
+competencyCards.forEach(card => {
+  card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s ease';
+});
+
+// Event listeners
+window.addEventListener('scroll', checkScroll);
+window.addEventListener('load', checkScroll);
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
