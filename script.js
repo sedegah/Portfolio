@@ -1,13 +1,18 @@
-// script.js
-
 // ===== Dark Mode with Local Storage =====
 const darkModeToggle = document.getElementById('toggle-dark-mode');
 let darkMode = localStorage.getItem('darkMode') === 'true';
 
 function applyDarkMode() {
   document.body.classList.toggle('dark-mode', darkMode);
-  darkModeToggle.textContent = darkMode ? '☀️' : '🌙';
+  darkModeToggle.innerHTML = darkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   darkModeToggle.setAttribute('aria-label', darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+  
+  // Update particles for dark mode
+  if (darkMode) {
+    document.querySelector('canvas')?.style?.setProperty('opacity', '0.08');
+  } else {
+    document.querySelector('canvas')?.style?.setProperty('opacity', '0.15');
+  }
 }
 
 darkModeToggle.addEventListener('click', () => {
@@ -28,13 +33,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         top: target.offsetTop - 80,
         behavior: 'smooth'
       });
+      
+      // Update URL without page jump
+      if (history.pushState) {
+        history.pushState(null, null, this.getAttribute('href'));
+      }
     }
   });
 });
 
 // ===== Animate Elements on Scroll =====
 const animateOnScroll = () => {
-  const elements = document.querySelectorAll('.section, .skill-item, .project-item');
+  const elements = document.querySelectorAll('.section, .skill-item, .project-item, .experience-item');
   elements.forEach(el => {
     const elTop = el.getBoundingClientRect().top;
     if (elTop < window.innerHeight - 100) {
@@ -45,7 +55,7 @@ const animateOnScroll = () => {
 };
 
 // Set initial state for animation
-document.querySelectorAll('.section, .skill-item, .project-item').forEach(el => {
+document.querySelectorAll('.section, .skill-item, .project-item, .experience-item').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -57,25 +67,28 @@ animateOnScroll(); // Run once on load
 // ===== Floating Badge Animation =====
 const floatingBadge = document.querySelector('.floating-badge');
 if (floatingBadge) {
-  setInterval(() => {
-    floatingBadge.style.transform = 'translateY(-5px)';
+  const floatAnimation = () => {
+    floatingBadge.style.transform = 'translateY(-8px)';
     setTimeout(() => {
       floatingBadge.style.transform = 'translateY(0)';
     }, 1000);
-  }, 2000);
+  };
+  setInterval(floatAnimation, 2000);
+  floatAnimation(); // Initial animation
 }
 
 // ===== Skill Item Hover Effects =====
 document.querySelectorAll('.skill-item').forEach(item => {
   item.addEventListener('mouseenter', () => {
+    item.style.transform = 'scale(1.05)';
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
-      icon.style.transform = 'scale(1.1)';
-      icon.style.transition = 'transform 0.3s ease';
+      icon.style.transform = 'scale(1.2) rotate(5deg)';
     }
   });
   
   item.addEventListener('mouseleave', () => {
+    item.style.transform = '';
     const icon = item.querySelector('i, .custom-skill-icon');
     if (icon) {
       icon.style.transform = '';
@@ -86,13 +99,15 @@ document.querySelectorAll('.skill-item').forEach(item => {
 // ===== Project Card Hover Effect =====
 document.querySelectorAll('.project-item').forEach(card => {
   card.addEventListener('mouseenter', () => {
-    card.style.transform = 'translateY(-5px)';
-    card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+    card.style.transform = 'translateY(-10px) scale(1.02)';
+    card.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
+    card.querySelector('.project-image')?.style?.setProperty('filter', 'brightness(1.05)');
   });
   
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
     card.style.boxShadow = '';
+    card.querySelector('.project-image')?.style?.setProperty('filter', 'brightness(1)');
   });
 });
 
@@ -108,26 +123,76 @@ if (heroText) {
       heroText.textContent += originalText.charAt(i);
       i++;
       setTimeout(typeWriter, Math.random() * 50 + 30);
+    } else {
+      // Add blinking cursor effect after typing completes
+      heroText.classList.add('typed');
     }
   };
   
-  setTimeout(typeWriter, 1000);
+  setTimeout(typeWriter, 500);
+}
+
+// ===== Dynamic Text for Projects Section =====
+const projectsDynamicText = document.querySelector('.projects-dynamic-text');
+if (projectsDynamicText) {
+  const words = [
+    "That Solve Problems", 
+    "That Make Impact",
+    "I'm Proud Of",
+    "With Modern Tech",
+    "That Push Boundaries",
+    "With Clean Code",
+    "That Inspire Me"
+  ];
+  
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 150;
+
+  function typeEffect() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      projectsDynamicText.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 80;
+    } else {
+      projectsDynamicText.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 150;
+    }
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      isDeleting = true;
+      typeSpeed = 2000; // Pause at end of word
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typeSpeed = 500; // Pause before next word
+    }
+
+    setTimeout(typeEffect, typeSpeed);
+  }
+
+  // Start after hero text completes (approx 2.5s)
+  setTimeout(typeEffect, 2500);
 }
 
 // ===== Progress Bar Animation =====
 const animateProgressBars = () => {
   document.querySelectorAll('.progress-fill').forEach(bar => {
-    const width = bar.style.width;
+    const width = bar.getAttribute('data-width') || bar.style.width;
     bar.style.width = '0';
-    bar.style.transition = 'width 0s'; // Reset transition for initial animation
+    bar.style.transition = 'width 0s';
+    
     setTimeout(() => {
       bar.style.width = width;
-      bar.style.transition = 'width 1.5s ease-out'; // Smooth animation
-    }, 50);
+      bar.style.transition = 'width 1.2s cubic-bezier(0.22, 0.61, 0.36, 1)';
+    }, 100);
   });
 };
 
-// Run when progress bars are visible
 const progressObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -135,7 +200,7 @@ const progressObserver = new IntersectionObserver((entries) => {
       progressObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.3 });
 
 document.querySelectorAll('.progress-container').forEach(container => {
   progressObserver.observe(container);
@@ -149,13 +214,13 @@ if (yearElement) {
 
 // ===== Scroll to Top Button =====
 const scrollToTopBtn = document.createElement('button');
-scrollToTopBtn.innerHTML = '↑';
+scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
 scrollToTopBtn.id = 'scroll-to-top';
 scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
 document.body.appendChild(scrollToTopBtn);
 
 window.addEventListener('scroll', () => {
-  scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+  scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'flex' : 'none';
 });
 
 scrollToTopBtn.addEventListener('click', () => {
@@ -166,17 +231,19 @@ scrollToTopBtn.addEventListener('click', () => {
 document.querySelectorAll('.skill-item').forEach(skill => {
   const tooltip = document.createElement('div');
   tooltip.className = 'skill-tooltip';
-  tooltip.textContent = skill.querySelector('span').textContent;
+  tooltip.textContent = skill.dataset.skill || skill.querySelector('span').textContent;
   skill.appendChild(tooltip);
   
   skill.addEventListener('mouseenter', () => {
     tooltip.style.opacity = '1';
     tooltip.style.visibility = 'visible';
+    tooltip.style.transform = 'translateX(-50%) translateY(0)';
   });
   
   skill.addEventListener('mouseleave', () => {
     tooltip.style.opacity = '0';
     tooltip.style.visibility = 'hidden';
+    tooltip.style.transform = 'translateX(-50%) translateY(10px)';
   });
 });
 
@@ -198,42 +265,74 @@ style.textContent = `
     opacity: 0.9;
     transition: all 0.3s ease;
     z-index: 100;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
   }
   
   #scroll-to-top:hover {
     opacity: 1;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(140, 59, 255, 0.4);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 5px 20px rgba(140, 59, 255, 0.5);
   }
   
   .skill-tooltip {
     position: absolute;
     bottom: -35px;
     left: 50%;
-    transform: translateX(-50%);
-    background: #333;
+    transform: translateX(-50%) translateY(10px);
+    background: #8c3bff;
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
     font-size: 0.8rem;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     white-space: nowrap;
     z-index: 10;
+    font-weight: 500;
   }
   
   body.dark-mode .skill-tooltip {
-    background: #fff;
-    color: #333;
+    background: #b07aff;
+    color: #fff;
   }
   
   .project-item {
-    transition: all 0.3s ease !important;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   }
   
   .progress-fill {
-    transition: width 1.5s ease-out !important;
+    transition: width 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+  }
+  
+  .projects-dynamic-text {
+    color: #8c3bff;
+    font-weight: 600;
+    margin-left: 8px;
+    display: inline-block;
+    min-width: 200px;
+  }
+  
+  body.dark-mode .projects-dynamic-text {
+    color: #b07aff;
+  }
+  
+  h1.typed {
+    position: relative;
+  }
+  
+  h1.typed::after {
+    content: '|';
+    position: absolute;
+    animation: blink 1s infinite;
+    color: #8c3bff;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 `;
 document.head.appendChild(style);
@@ -253,7 +352,7 @@ function initParticles() {
   canvas.height = window.innerHeight;
 
   const particles = [];
-  const particleCount = Math.min(window.innerWidth / 4, 150);
+  const particleCount = Math.min(window.innerWidth / 3, 200);
 
   for (let i = 0; i < particleCount; i++) {
     particles.push({
@@ -262,7 +361,7 @@ function initParticles() {
       size: Math.random() * 2 + 1,
       speedX: Math.random() * 1 - 0.5,
       speedY: Math.random() * 1 - 0.5,
-      color: `hsla(${Math.random() * 60 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
+      color: `hsla(${Math.random() * 30 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
     });
   }
 
@@ -273,6 +372,7 @@ function initParticles() {
       p.x += p.speedX;
       p.y += p.speedY;
       
+      // Bounce off edges
       if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
       if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
       
@@ -286,6 +386,7 @@ function initParticles() {
   }
   
   animateParticles();
+  
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
