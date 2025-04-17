@@ -57,16 +57,8 @@ const darkModeToggle = {
   }
 };
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  darkModeToggle.init();
-  
-  // Optional: Add smooth transition after load to prevent flash
-  setTimeout(() => {
-    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-  }, 100);
-  
-  // Initialize particles.js for background
+// ===== Particles.js for Background =====
+function initializeParticles() {
   particlesJS('particles-js', {
     particles: {
       number: {
@@ -151,8 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     retina_detect: true
   });
+}
 
-  // Dynamic text change
+// ===== Dynamic Text Change =====
+function dynamicTextChange() {
   const textElement = document.getElementById('dynamic-text');
   const phrases = [
     "Tech Developer | Creating Innovative Solutions for Real-World Challenges",
@@ -167,4 +161,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setInterval(changeText, 3000); // Change text every 3 seconds
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Dark Mode Toggle
+  darkModeToggle.init();
+  
+  // Optional: Add smooth transition after load to prevent flash
+  setTimeout(() => {
+    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+  }, 100);
+
+  // Initialize Particles.js
+  initializeParticles();
+  
+  // Initialize Dynamic Text
+  dynamicTextChange();
 });
