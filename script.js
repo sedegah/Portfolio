@@ -106,30 +106,43 @@ if (heroText) {
   let phraseIndex = 0;
   let letterIndex = 0;
   let isDeleting = false;
-  let isFinal = false;
 
   function typePhrase() {
     const currentPhrase = phrases[phraseIndex];
     const displayedText = currentPhrase.slice(0, letterIndex);
     heroText.textContent = displayedText;
 
+    // If not deleting, add characters
     if (!isDeleting && letterIndex < currentPhrase.length) {
       letterIndex++;
       setTimeout(typePhrase, Math.random() * 80 + 30);
-    } else if (isDeleting && letterIndex > 0) {
+    } 
+    // If deleting, remove characters
+    else if (isDeleting && letterIndex > 0) {
       letterIndex--;
       setTimeout(typePhrase, Math.random() * 40 + 20);
-    } else {
-      if (phraseIndex === phrases.length - 1 && !isDeleting) {
-        isFinal = true;
-        return;
+    } 
+    // Switch to deleting after the phrase is fully typed
+    else {
+      // Pause for a moment before deleting
+      if (!isDeleting) {
+        isDeleting = true;
+        setTimeout(typePhrase, 1000); // Delay before deleting starts
+      } 
+      // Switch to next phrase after deleting
+      else {
+        if (phraseIndex === phrases.length - 1) {
+          phraseIndex = 0; // Reset back to the first phrase
+        } else {
+          phraseIndex++;
+        }
+        isDeleting = false;
+        setTimeout(typePhrase, 500); // Delay before starting the typing again
       }
-      isDeleting = !isDeleting;
-      if (!isDeleting) phraseIndex++;
-      setTimeout(typePhrase, 1000);
     }
   }
-  setTimeout(typePhrase, 1000);
+
+  setTimeout(typePhrase, 1000); // Start typing after a brief delay
 }
 
 // ===== Progress Bar Animation =====
@@ -274,7 +287,7 @@ function initParticles() {
       size: Math.random() * 2 + 1,
       speedX: Math.random() * 1 - 0.5,
       speedY: Math.random() * 1 - 0.5,
-      color: hsla(${Math.random() * 60 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})
+      color: `hsla(${Math.random() * 60 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
     });
   }
 
