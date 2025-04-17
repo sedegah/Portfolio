@@ -1,11 +1,21 @@
 // ===== Dark Mode with Local Storage =====
 const darkModeToggle = document.getElementById('toggle-dark-mode');
 let darkMode = localStorage.getItem('darkMode') === 'true';
+let particlesCanvas = null;
+let animationFrameId = null;
 
 function applyDarkMode() {
   document.body.classList.toggle('dark-mode', darkMode);
   darkModeToggle.textContent = darkMode ? '☀️' : '🌙';
   darkModeToggle.setAttribute('aria-label', darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+  
+  // Update particle colors
+  const lightness = darkMode ? '60%' : '30%';
+  const saturation = '80%';
+  const baseHue = 270;
+  particles.forEach(p => {
+    p.color = `hsla(${Math.random() * 60 + baseHue}, ${saturation}, ${lightness}, ${p.color.split(',')[3]}`;
+  });
 }
 
 darkModeToggle.addEventListener('click', () => {
@@ -112,37 +122,27 @@ if (heroText) {
     const displayedText = currentPhrase.slice(0, letterIndex);
     heroText.textContent = displayedText;
 
-    // If not deleting, add characters
     if (!isDeleting && letterIndex < currentPhrase.length) {
       letterIndex++;
       setTimeout(typePhrase, Math.random() * 80 + 30);
     } 
-    // If deleting, remove characters
     else if (isDeleting && letterIndex > 0) {
       letterIndex--;
       setTimeout(typePhrase, Math.random() * 40 + 20);
     } 
-    // Switch to deleting after the phrase is fully typed
     else {
-      // Pause for a moment before deleting
       if (!isDeleting) {
         isDeleting = true;
-        setTimeout(typePhrase, 1000); // Delay before deleting starts
+        setTimeout(typePhrase, 1000);
       } 
-      // Switch to next phrase after deleting
       else {
-        if (phraseIndex === phrases.length - 1) {
-          phraseIndex = 0; // Reset back to the first phrase
-        } else {
-          phraseIndex++;
-        }
+        phraseIndex = phraseIndex === phrases.length - 1 ? 0 : phraseIndex + 1;
         isDeleting = false;
-        setTimeout(typePhrase, 500); // Delay before starting the typing again
+        setTimeout(typePhrase, 500);
       }
     }
   }
-
-  setTimeout(typePhrase, 1000); // Start typing after a brief delay
+  setTimeout(typePhrase, 1000);
 }
 
 // ===== Progress Bar Animation =====
@@ -260,46 +260,62 @@ style.textContent = `
   .progress-fill {
     transition: width 1.5s ease-out !important;
   }
+  canvas {
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
 document.head.appendChild(style);
 
-// ===== Animated Background Particles =====
+// ===== Mobile-Optimized Animated Background Particles =====
+let particles = [];
+
 function initParticles() {
-  const canvas = document.createElement('canvas');
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.zIndex = '-1';
-  canvas.style.opacity = '0.15';
-  document.body.appendChild(canvas);
+  if (particlesCanvas) {
+    document.body.removeChild(particlesCanvas);
+    cancelAnimationFrame(animationFrameId);
+    particles = [];
+  }
 
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  particlesCanvas = document.createElement('canvas');
+  particlesCanvas.style.position = 'fixed';
+  particlesCanvas.style.top = '0';
+  particlesCanvas.style.left = '0';
+  particlesCanvas.style.zIndex = '-1';
+  particlesCanvas.style.opacity = '0.15';
+  particlesCanvas.style.pointerEvents = 'none';
+  document.body.appendChild(particlesCanvas);
 
-  const particles = [];
-  const particleCount = Math.min(window.innerWidth / 4, 150);
+  const ctx = particlesCanvas.getContext('2d');
+  particlesCanvas.width = window.innerWidth;
+  particlesCanvas.height = window.innerHeight;
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const particleCount = isMobile ? 75 : Math.min(window.innerWidth / 4, 150);
+  const baseHue = 270;
+  const lightness = darkMode ? '60%' : '30%';
+  const saturation = '80%';
 
   for (let i = 0; i < particleCount; i++) {
     particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
+      x: Math.random() * particlesCanvas.width,
+      y: Math.random() * particlesCanvas.height,
       size: Math.random() * 2 + 1,
-      speedX: Math.random() * 1 - 0.5,
-      speedY: Math.random() * 1 - 0.5,
-      color: `hsla(${Math.random() * 60 + 270}, 80%, 60%, ${Math.random() * 0.3 + 0.1})`
+      speedX: (Math.random() - 0.5) * 1,
+      speedY: (Math.random() - 0.5) * 1,
+      color: `hsla(${Math.random() * 60 + baseHue}, ${saturation}, ${lightness}, ${Math.random() * 0.3 + 0.1})`
     });
   }
 
   function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
 
     particles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
 
-      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      if (p.x < 0 || p.x > particlesCanvas.width) p.speedX *= -1;
+      if (p.y < 0 || p.y > particlesCanvas.height) p.speedY *= -1;
 
       ctx.fillStyle = p.color;
       ctx.beginPath();
@@ -307,15 +323,32 @@ function initParticles() {
       ctx.fill();
     });
 
-    requestAnimationFrame(animateParticles);
+    animationFrameId = requestAnimationFrame(animateParticles);
   }
 
   animateParticles();
+
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      particlesCanvas.width = window.innerWidth;
+      particlesCanvas.height = window.innerHeight;
+      particles.forEach(p => {
+        p.x = Math.random() * particlesCanvas.width;
+        p.y = Math.random() * particlesCanvas.height;
+      });
+    }, 200);
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationFrameId);
+    } else {
+      animateParticles();
+    }
   });
 }
 
-// Initialize particles
+// Initialize all components
 initParticles();
