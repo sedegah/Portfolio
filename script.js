@@ -302,6 +302,46 @@ function initParticles() {
   animate();
 }
 
+
+
+// Select all progress bars
+const progressBars = document.querySelectorAll('.progress-fill');
+
+// Define the progress percentage for each skill
+const progressData = {
+  java: 70,
+  python: 85,
+  htmlcss: 90,
+  php: 75,
+  sql: 80,
+  cpp: 60,
+  csharp: 65
+};
+
+// Function to update progress bars
+function updateProgressBars() {
+  progressBars.forEach((bar) => {
+    const className = bar.parentElement.classList[1]; // Get the class from the parent element (e.g., 'progress-java')
+    const skill = className.replace('progress-', ''); // Remove 'progress-' to match the keys in progressData
+    const width = progressData[skill]; // Get the width from the data object
+
+    if (width) {
+      bar.style.width = `${width}%`; // Set the width of the progress bar
+    }
+  });
+}
+
+// Trigger the progress bar update when the section is in view
+window.addEventListener('scroll', () => {
+  const section = document.getElementById('programming-languages');
+  const sectionPosition = section.getBoundingClientRect();
+  
+  if (sectionPosition.top <= window.innerHeight && sectionPosition.bottom >= 0) {
+    updateProgressBars();
+  }
+});
+
+
 initParticles();
 
 // ===== Dynamic Copyright Year =====
