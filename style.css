@@ -19,6 +19,30 @@ body {
   padding: 0 2rem;
   transition: background 0.3s ease, color 0.3s ease;
 }
+#typewriter-wrapper {
+  height: 2.5rem; /* Enough for one line */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#typewriter {
+  display: inline-block;
+  font-size: 2rem;
+  white-space: nowrap;
+}
+
+#typewriter::after {
+  content: '|';
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 
 /*----------------------------------------------
   DARK MODE
