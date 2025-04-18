@@ -186,25 +186,31 @@ body.dark-mode .section {
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }  
-/* Responsive styling for About Me on mobile */
+/* Responsive adjustments for About Me section */
 @media (max-width: 768px) {
   #about .content-container {
-    padding: 0 1rem;
-    text-align: left;
+    padding: 1rem 1.2rem;
+    text-align: justify;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   #about .content-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   #about .content-container p {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 1rem;
+    word-break: break-word;
+  }
+
+  .section {
+    padding: 2rem 1rem;
   }
 }
-
 /* Core Competencies Section */
 .skills-categories {
   padding: 4rem 2rem;
