@@ -125,11 +125,6 @@ nav {
   min-height: 1.5em; /* Or adjust to match tallest line */
   font-size: 2rem;
   white-space: nowrap;
-}
-#typewriter::after {
-  content: '|';
-  animation: blink 1s step-start infinite;
-}
 
 
 
