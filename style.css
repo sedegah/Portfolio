@@ -185,7 +185,26 @@ body.dark-mode .section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+}  
+/* Responsive styling for About Me on mobile */
+@media (max-width: 768px) {
+  #about .content-container {
+    padding: 0 1rem;
+    text-align: left;
+  }
+
+  #about .content-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #about .content-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
 }
+
 /* Core Competencies Section */
 .skills-categories {
   padding: 4rem 2rem;
