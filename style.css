@@ -186,29 +186,40 @@ body.dark-mode .section {
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }  
-/* Responsive adjustments for About Me section */
+/* About Me Section */
+#about .about-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+#about h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.about-subtitle {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
-  #about .content-container {
-    padding: 1rem 1.2rem;
-    text-align: justify;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  #about .content-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  #about .content-container p {
+  #about .about-wrapper {
+    padding: 10px 20px;
     font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-    word-break: break-word;
   }
 
-  .section {
-    padding: 2rem 1rem;
+  #about h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.05rem;
   }
 }
 /* Core Competencies Section */
