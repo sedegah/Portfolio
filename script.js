@@ -29,33 +29,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
-
-const typewriter = document.getElementById("typewriter");
-const phrases = [
-  "Tech Developer",
-  "AI & Cloud Enthusiast",
-  "Innovating Real-World Solutions"
-];
-let phraseIndex = 0;
-let charIndex = 0;
-
-function type() {
-  if (charIndex < phrases[phraseIndex].length) {
-    typewriter.textContent += phrases[phraseIndex].charAt(charIndex);
-    charIndex++;
-    setTimeout(type, 100);
-  } else {
-    setTimeout(() => {
-      typewriter.textContent = "";
-      charIndex = 0;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      type();
-    }, 2000);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", type);
-
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
