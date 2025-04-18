@@ -96,6 +96,24 @@ nav {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+#typewriter {
+  display: inline-block;
+  min-height: 1.5em; /* Or adjust to match tallest line */
+  font-size: 2rem;
+  white-space: nowrap;
+}
+#typewriter::after {
+  content: '|';
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+
 /*----------------------------------------------
   HERO SECTION
 -----------------------------------------------*/
