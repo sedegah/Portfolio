@@ -846,19 +846,3 @@ body.dark-mode .category-card:hover {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
-/* Add to your existing stylesheet */
-.hero-content h1 {
-  display: inline-block;      /* keep it next to the photo */
-  white-space: nowrap;        /* don’t wrap lines */
-  overflow: hidden;           /* hide extra letters */
-  vertical-align: middle;     /* align with your photo */
-}
-
-/* This pseudo‑element reserves max‑width space invisibly */
-.hero-content h1::after {
-  content: 'Tech Developer | Creating Innovative Solutions for Real-World Challenges';
-  visibility: hidden;         /* invisible but still takes up room */
-  white-space: nowrap;
-  display: inline-block;
-}
-
