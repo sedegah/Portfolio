@@ -15,26 +15,27 @@ darkModeToggle.addEventListener('click', () => {
 });
 
 applyDarkMode();
+
 // ===== Animate Elements on Scroll =====
 const animateOnScroll = () => {
-  const elements = document.querySelectorAll('.section, .skill-item, .project-item');
+  const elements = document.querySelectorAll('.section, .skill-item, .project-item, .category-card');
   elements.forEach(el => {
     const elTop = el.getBoundingClientRect().top;
     if (elTop < window.innerHeight - 100) {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
+      el.classList.add('visible');
     }
   });
 };
 
-document.querySelectorAll('.section, .skill-item, .project-item').forEach(el => {
+document.querySelectorAll('.section, .skill-item, .project-item, .category-card').forEach(el => {
+  el.classList.remove('visible');
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 });
 
 window.addEventListener('scroll', animateOnScroll);
-animateOnScroll();
+window.addEventListener('load', animateOnScroll);
 
 // ===== Floating Badge Animation =====
 const floatingBadge = document.querySelector('.floating-badge');
@@ -97,37 +98,25 @@ if (heroText) {
     const displayedText = currentPhrase.slice(0, letterIndex);
     heroText.textContent = displayedText;
 
-    // If not deleting, add characters
     if (!isDeleting && letterIndex < currentPhrase.length) {
       letterIndex++;
       setTimeout(typePhrase, Math.random() * 80 + 30);
-    } 
-    // If deleting, remove characters
-    else if (isDeleting && letterIndex > 0) {
+    } else if (isDeleting && letterIndex > 0) {
       letterIndex--;
       setTimeout(typePhrase, Math.random() * 40 + 20);
-    } 
-    // Switch to deleting after the phrase is fully typed
-    else {
-      // Pause for a moment before deleting
+    } else {
       if (!isDeleting) {
         isDeleting = true;
-        setTimeout(typePhrase, 1000); // Delay before deleting starts
-      } 
-      // Switch to next phrase after deleting
-      else {
-        if (phraseIndex === phrases.length - 1) {
-          phraseIndex = 0; // Reset back to the first phrase
-        } else {
-          phraseIndex++;
-        }
+        setTimeout(typePhrase, 1000);
+      } else {
+        phraseIndex = (phraseIndex + 1) % phrases.length;
         isDeleting = false;
-        setTimeout(typePhrase, 500); // Delay before starting the typing again
+        setTimeout(typePhrase, 500);
       }
     }
   }
 
-  setTimeout(typePhrase, 1000); // Start typing after a brief delay
+  setTimeout(typePhrase, 1000);
 }
 
 // ===== Progress Bar Animation =====
@@ -181,7 +170,7 @@ scrollToTopBtn.addEventListener('click', () => {
 document.querySelectorAll('.skill-item').forEach(skill => {
   const tooltip = document.createElement('div');
   tooltip.className = 'skill-tooltip';
-  tooltip.textContent = skill.querySelector('span').textContent;
+  tooltip.textContent = skill.querySelector('span')?.textContent || '';
   skill.appendChild(tooltip);
 
   skill.addEventListener('mouseenter', () => {
@@ -245,6 +234,10 @@ style.textContent = `
   .progress-fill {
     transition: width 1.5s ease-out !important;
   }
+  .visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
 `;
 document.head.appendChild(style);
 
@@ -278,7 +271,6 @@ function initParticles() {
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     particles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
@@ -297,33 +289,9 @@ function initParticles() {
 
   animateParticles();
 
-
-
-  // Animate competency cards on scroll
-const competencyCards = document.querySelectorAll('.category-card');
-
-function checkScroll() {
-  competencyCards.forEach(card => {
-    const cardTop = card.getBoundingClientRect().top;
-    if(cardTop < window.innerHeight - 100) {
-      card.classList.add('visible');
-    }
-  });
-}
-
-// Initial animation setup
-competencyCards.forEach(card => {
-  card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s ease';
-});
-
-// Event listeners
-window.addEventListener('scroll', checkScroll);
-window.addEventListener('load', checkScroll);
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 }
-
-// Initialize particles
 initParticles();
