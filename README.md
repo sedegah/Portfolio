@@ -1,6 +1,6 @@
-# Portfolio Site
+# Kimathi Elikplim Sedegah — Portfolio Site
 
-A personal portfolio website showcasing projects, skills, and experience. Built with vanilla HTML, CSS, and JavaScript, this site features modern UI/UX enhancements to deliver an engaging visitor experience.
+Welcome to the personal portfolio of **Kimathi Elikplim Sedegah**. Hosted at [https://kimathisedegah.vercel.app](https://kimathisedegah.vercel.app), this site highlights my web development skills, project showcase, and design philosophy. Key sections include a hero banner with a dynamic typewriter text effect, skill cards with tooltips, project galleries, and interactive scroll animations.
 
 ## Table of Contents
 
@@ -21,7 +21,7 @@ A personal portfolio website showcasing projects, skills, and experience. Built 
 
 ## Demo
 
-Live demo available at: [https://your-domain.vercel.app](https://your-domain.vercel.app)
+Live demo available at: [https://kimathisedegah.vercel.app](https://kimathisedegah.vercel.app)
 
 ---
 
@@ -65,7 +65,7 @@ These instructions will help you get a copy of the project running on your local
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/portfolio-site.git
+   git clone https://github.com/kimathisedegah/portfolio-site.git
    cd portfolio-site
    ```
 2. (Optional) Install a live server to preview:
