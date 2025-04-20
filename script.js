@@ -75,7 +75,7 @@ document.querySelectorAll('.project-item').forEach(card => {
   });
 });
 
-// ===== Typewriter Effect for Hero Text (NO layout shift!) =====
+// ===== Typewriter Effect for Hero Text =====
 const heroText = document.querySelector('.hero-content h1');
 if (heroText) {
   const phrases = [
@@ -84,15 +84,8 @@ if (heroText) {
     'Let’s create something amazing!',
     'Tech Developer | Creating Innovative Solutions for Real-World Challenges'
   ];
-
-  // **Prevent reflow** by fixing the container width
-  const maxLen = Math.max(...phrases.map(p => p.length));
-  heroText.style.display     = 'inline-block';
-  heroText.style.whiteSpace  = 'nowrap';
-  heroText.style.overflow    = 'hidden';
-  heroText.style.width       = `${maxLen}ch`;
-
   let phraseIndex = 0, letterIndex = 0, isDeleting = false;
+
   function typePhrase() {
     const current = phrases[phraseIndex];
     heroText.textContent = current.slice(0, letterIndex);
@@ -109,11 +102,12 @@ if (heroText) {
         setTimeout(typePhrase, 1000);
       } else {
         phraseIndex = (phraseIndex + 1) % phrases.length;
-        isDeleting  = false;
+        isDeleting = false;
         setTimeout(typePhrase, 500);
       }
     }
   }
+
   setTimeout(typePhrase, 1000);
 }
 
@@ -179,7 +173,7 @@ document.querySelectorAll('.skill-item').forEach(skill => {
   });
 });
 
-// ===== Inject Needed CSS =====
+// ===== Add Remaining CSS Rules via <style> Injection =====
 const style = document.createElement('style');
 style.textContent = `
   #scroll-to-top {
