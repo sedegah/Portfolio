@@ -57,9 +57,12 @@ document.querySelectorAll('.skill-item').forEach(item => {
       icon.style.transition = 'transform 0.3s ease';
     }
   });
+
   item.addEventListener('mouseleave', () => {
     const icon = item.querySelector('i, .custom-skill-icon');
-    if (icon) icon.style.transform = '';
+    if (icon) {
+      icon.style.transform = '';
+    }
   });
 });
 
@@ -69,6 +72,7 @@ document.querySelectorAll('.project-item').forEach(card => {
     card.style.transform = 'translateY(-5px)';
     card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
   });
+
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
     card.style.boxShadow = '';
@@ -84,13 +88,17 @@ if (heroText) {
     'Let’s create something amazing!',
     'Tech Developer | Creating Innovative Solutions for Real-World Challenges'
   ];
-  let phraseIndex = 0, letterIndex = 0, isDeleting = false;
+
+  let phraseIndex = 0;
+  let letterIndex = 0;
+  let isDeleting = false;
 
   function typePhrase() {
-    const current = phrases[phraseIndex];
-    heroText.textContent = current.slice(0, letterIndex);
+    const currentPhrase = phrases[phraseIndex];
+    const displayedText = currentPhrase.slice(0, letterIndex);
+    heroText.textContent = displayedText;
 
-    if (!isDeleting && letterIndex < current.length) {
+    if (!isDeleting && letterIndex < currentPhrase.length) {
       letterIndex++;
       setTimeout(typePhrase, Math.random() * 80 + 30);
     } else if (isDeleting && letterIndex > 0) {
@@ -153,6 +161,7 @@ document.body.appendChild(scrollToTopBtn);
 window.addEventListener('scroll', () => {
   scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
 });
+
 scrollToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
@@ -163,17 +172,19 @@ document.querySelectorAll('.skill-item').forEach(skill => {
   tooltip.className = 'skill-tooltip';
   tooltip.textContent = skill.querySelector('span')?.textContent || '';
   skill.appendChild(tooltip);
+
   skill.addEventListener('mouseenter', () => {
     tooltip.style.opacity = '1';
     tooltip.style.visibility = 'visible';
   });
+
   skill.addEventListener('mouseleave', () => {
     tooltip.style.opacity = '0';
     tooltip.style.visibility = 'hidden';
   });
 });
 
-// ===== Add Remaining CSS Rules via <style> Injection =====
+// ===== Add CSS for new elements =====
 const style = document.createElement('style');
 style.textContent = `
   #scroll-to-top {
@@ -246,6 +257,7 @@ function initParticles() {
 
   const particles = [];
   const particleCount = Math.min(window.innerWidth / 4, 150);
+
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * canvas.width,
@@ -262,21 +274,24 @@ function initParticles() {
     particles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
+
       if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
       if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
       ctx.fillStyle = p.color;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
     });
+
     requestAnimationFrame(animateParticles);
   }
 
   animateParticles();
+
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 }
-
 initParticles();
