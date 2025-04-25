@@ -1,68 +1,283 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Kimathi Sedegah</title>
-    <link rel="icon" type="image/png" href="images/CodeCad.png" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <img src="images/profile.jpg" alt="Kimathi Sedegah" class="profile-img" />
-        <h1>Kimathi Elikplim Sedegah</h1>
-        <p>Computer Science Student | University of Ghana</p>
-        <p><a href="mailto:kimathi@example.com">kimathi@example.com</a></p>
-        <p><a href="https://kimathisedegah.vercel.app" target="_blank">Portfolio</a></p>
-      </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kimathi Sedegah – Tech Developer</title>
+  <link rel="icon" type="image/png" href="CodeCad.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
 
-      <section class="bio">
-        <h2>About Me</h2>
-        <p>
-          I am a tech enthusiast with a passion for software development, AI, and data science. I
-          love creating useful and innovative solutions to real-world problems. I'm currently
-          pursuing a BSc in Computer Science at the University of Ghana.
-        </p>
-      </section>
-
-      <section class="experience">
-        <h2>Experience</h2>
-        <ul>
-          <li>Project Coordinator at Code Cadence (2025–Present)</li>
-          <li>STEM for Development Ambassador (2025–Present)</li>
-        </ul>
-      </section>
-
-      <section class="education">
-        <h2>Education</h2>
-        <ul>
-          <li>University of Ghana (2024–2027) - BSc Computer Science</li>
-          <li>Presbyterian Boys' Secondary School (Presec), Graduated 2023</li>
-        </ul>
-      </section>
-
-      <section class="skills">
-        <h2>Skills</h2>
-        <ul>
-          <li>JavaScript, HTML, CSS</li>
-          <li>React, Tailwind CSS, Vite</li>
-          <li>Python, R, Machine Learning</li>
-          <li>Git & GitHub, Vercel, Netlify</li>
-        </ul>
-      </section>
-
-      <section class="contact">
-        <h2>Contact</h2>
-        <p>Phone: +233 209 253 226</p>
-        <p>
-          LinkedIn:
-          <a href="https://linkedin.com/in/kimathi-sedegah-227a40347" target="_blank"
-            >kimathi-sedegah</a
-          >
-        </p>
-      </section>
+<body class="dark-mode">
+  <nav>
+    <div class="logo">kimathi sedegah<span>.</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact" class="cta-button">Let's talk</a>
     </div>
-  </body>
+  </nav>
+
+  <button id="toggle-dark-mode" class="moon-button" aria-label="Switch to Light Mode">☀️</button>
+
+  <main class="hero">
+    <div class="hero-content">
+      <div class="greeting">👋 Hi, I'm Kimathi!</div>
+      <h1>Tech Developer | Creating Innovative Solutions for Real-World Challenges</h1>
+      <div id="typewriter-wrapper">
+  <h1 id="typewriter"></h1>
+</div>
+
+      <p class="bio">
+        I am a passionate and driven tech enthusiast specializing in Python,
+        JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda.
+        Currently pursuing a degree at the University of Ghana with a focus on AI
+        & Cloud computing.
+      </p>
+    </div>
+    <div class="hero-image">
+      <img src="images/profile.jpg" alt="Profile" />
+      <div class="floating-badge">tech development & AI</div>
+    </div>
+  </main>
+
+  <section id="skills" class="section">
+    <h2>Tech Stack</h2>
+    <div class="skills-grid">
+      <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
+      <div class="skill-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="skill-item"><i class="fab fa-php"></i><span>PHP</span></div>
+      <div class="skill-item"><i class="fas fa-database"></i><span>SQL</span></div>
+      <div class="skill-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+      <div class="skill-item"><i class="fab fa-aws"></i><span>Cloud</span></div>
+      <div class="skill-item"><i class="fab fa-java"></i><span>Java</span></div>
+      <div class="skill-item"><i class="fab fa-cuttlefish"></i><span>C++</span></div>
+      <div class="skill-item"><i class="fas fa-code"></i><span>C#</span></div>
+      <div class="skill-item"><i class="fas fa-cogs"></i><span>Kubernetes</span></div>
+      <div class="skill-item"><i class="fab fa-react"></i><span>React.js</span></div>
+      <div class="skill-item"><i class="fas fa-chart-line"></i><span>Data Analysis</span></div>
+    </div>
+  </section>
+
+  <section id="programming-languages" class="section">
+    <h2>Programming Languages</h2>
+    <div class="progress-container progress-java">
+      <div class="progress-label">Java (OOP)</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="progress-container progress-python">
+      <div class="progress-label">Python</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="progress-container progress-htmlcss">
+      <div class="progress-label">HTML / CSS / JavaScript</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="progress-container progress-php">
+      <div class="progress-label">PHP</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="progress-container progress-sql">
+      <div class="progress-label">SQL</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="progress-container progress-cpp">
+      <div class="progress-label">C++</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="progress-container progress-csharp">
+      <div class="progress-label">C#</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+  <div class="about-wrapper">
+    <h2>About Me</h2>
+    <p class="about-subtitle">Aspiring Software Developer | AI & Cloud Enthusiast | Student at the University of Ghana</p>
+    <p>I am a passionate and driven tech enthusiast currently pursuing a degree at the University of Ghana (2024–2027). With a strong foundation in programming, I have developed skills in Python, JavaScript, PHP, SQL, and cloud technologies like Docker and Anaconda.</p>
+    <p>Beyond academics, I actively contribute to the tech community as a Student Volunteer at Google Developer Group, where I engage in AI, machine learning, and cloud computing initiatives. Let’s connect and share ideas.</p>
+  </div>
+</section>
+
+ <section class="skills-categories section">
+  <h2>Core Competencies</h2>
+  <div class="category-grid">
+    <!-- Frontend Development -->
+    <div class="category-card">
+      <i class="fas fa-laptop-code"></i>
+      <h3>Frontend Development</h3>
+      <p>Creating responsive, user-friendly web interfaces with modern frameworks like React and Vue.js</p>
+    </div>
+
+    <!-- Machine Learning -->
+    <div class="category-card">
+      <i class="fas fa-brain"></i>
+      <h3>Machine Learning</h3>
+      <p>Building intelligent systems and predictive models using Python, TensorFlow, and Scikit-Learn</p>
+    </div>
+
+    <!-- Web Design -->
+    <div class="category-card">
+      <i class="fas fa-palette"></i>
+      <h3>Web Design</h3>
+      <p>Designing sleek, visually appealing websites with focus on UX/UI and modern aesthetics</p>
+    </div>
+
+    <!-- Data Analysis -->
+    <div class="category-card">
+      <i class="fas fa-chart-bar"></i>
+      <h3>Data Analysis</h3>
+      <p>Extracting insights from complex datasets using statistical methods and visualization tools</p>
+    </div>
+
+    <!-- Academic Research -->
+    <div class="category-card">
+      <i class="fas fa-book-open"></i>
+      <h3>Academic Research</h3>
+      <p>Conducting rigorous scientific investigations and publishing peer-reviewed papers</p>
+    </div>
+
+    <!-- Mobile Development -->
+    <div class="category-card">
+      <i class="fas fa-mobile-alt"></i>
+      <h3>Mobile Development</h3>
+      <p>Crafting cross-platform mobile apps with Flutter and React Native</p>
+    </div>
+  </div>
+</section>
+ <section id="experience" class="section">
+  <h2>Experience</h2>
+
+  <div class="experience-item">
+    <h3>Project Coordinator - Code Cadence</h3>
+    <p class="duration">Apr 2025 – Present</p>
+    <p class="location">Remote</p>
+    <p>Overseeing tech-related projects, organizing developer sessions, and fostering collaboration in code communities.</p>
+  </div>
+
+  <div class="experience-item">
+    <h3>Student Ambassador - STEM for Development</h3>
+    <p class="duration">Apr 2025 – Present</p>
+    <p class="location">Ghana</p>
+    <p>Promoting STEM education and innovation across communities through outreach and mentorship programs.</p>
+  </div>
+
+  <div class="experience-item">
+    <h3>Student Volunteer - Google Developers Group</h3>
+    <p class="duration">Dec 2024 - Jan 2025 · 2 mos</p>
+    <p class="location">Ghana · Remote</p>
+    <p>Google Developer Group AI & Machine Learning Jam Session</p>
+    <p class="skills">Skills: Anaconda, Docker</p>
+  </div>
+</section>
+
+  <section id="education" class="section">
+    <h2>Education</h2>
+    <div class="education-item">
+      <h3>University of Ghana</h3>
+      <p class="duration">2024 - 2027</p>
+      <p class="skills">Focus: Statistics, Computer Science</p>
+    </div>
+    <div class="education-item">
+      <h3>Presbyterian Boys' Senior High School</h3>
+      <p class="duration">Mar 2021 - Sep 2023</p>
+      <p>High School Diploma, Biology/Biological Sciences</p>
+    </div>
+  </section>
+
+  <section id="certifications" class="section">
+    <h2>Certifications</h2>
+    <div class="cert-grid">
+      <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/j43dGscQHtJJ57N54/a77WE3de8qrxWferQ_j43dGscQHtJJ57N54_pYuSGdn3uHut7KKXd_1744393691028_completion_certificate.pdf" 
+         target="_blank" 
+         class="cert-item"
+         rel="noopener noreferrer">
+        Electronic Arts - Software Engineering Job Simulation
+        <i class="fas fa-external-link-alt link-icon"></i>
+      </a>
+      
+      <a href="https://www.credly.com/badges/5c8a06d8-112b-44fe-b4c6-c0d69a4c1248/linked_in_profile" 
+         target="_blank" 
+         class="cert-item"
+         rel="noopener noreferrer">
+        Introduction to IoT and Digital Transformation - Cisco
+        <i class="fas fa-external-link-alt link-icon"></i>
+      </a>
+      
+      <a href="https://www.hackerrank.com/certificates/iframe/d376f9af090d" 
+         target="_blank" 
+         class="cert-item"
+         rel="noopener noreferrer">
+        Java Fundamentals - HackerRank
+        <i class="fas fa-external-link-alt link-icon"></i>
+      </a>
+      
+      <a href="https://www.credly.com/badges/86523085-453d-4fce-bb80-a7ec7f258c21/linked_in_profile" 
+         target="_blank" 
+         class="cert-item"
+         rel="noopener noreferrer">
+        Operating Systems Fundamentals - Cisco
+        <i class="fas fa-external-link-alt link-icon"></i>
+      </a>
+      
+      <div class="cert-item">
+        Principles of Agentic Code Development
+      </div>
+      
+      <div class="cert-item">
+        Python for Data Science and AI Development - IBM
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+  <h2>Projects</h2>
+  <div class="project-grid">
+    
+   <div class="project-item">
+  <h3>ResumeCraft – Professional Resume Builder</h3>
+  <p class="duration">Apr 2025 – Present</p>
+  <p>AI-powered resume creation system featuring smart suggestions, ATS optimization, and customizable templates for professional job applications.</p>
+  <p><a href="https://craftresume.vercel.app" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a></p>
+</div>
+
+    
+    <div class="project-item">
+      <h3>LegonAttend – QR Code-Based Attendance System</h3>
+      <p class="duration">In Development</p>
+      <p>QR code–based tool for lecturers and event organizers, featuring unique session codes, real-time tracking, and mobile-first design.</p>
+      <p><a href="https://legonattend.vercel.app" class="project-link">Visit Project</a></p>
+    </div>
+    
+    <div class="project-item">
+      <h3>GigaRandoBot – Telegram Random Number Generator Bot</h3>
+      <p class="duration">Dec 2024 – Present</p>
+      <p>Generates random numbers within specified ranges, offering custom and quick-pick options for games and lotteries.</p>
+      <p><a href="https://t.me/gigarandobot" class="project-link">View Project</a></p>
+    </div>
+  </div>
+</section>
+  <section id="contact" class="contact-section">
+    <h2>Let's Talk</h2>
+    <div class="contact-info">
+      <a href="mailto:sedegahkimathi@gmail.com" class="contact-email">
+        <i class="fas fa-envelope"></i> sedegahkimathi@gmail.com
+      </a>
+      <a href="tel:+233209253226" class="contact-phone">
+        <i class="fas fa-phone"></i> +233209253226
+      </a>
+      <a href="https://www.linkedin.com/in/kimathi-sedegah-71b853360" target="_blank" class="contact-linkedin">
+        <i class="fab fa-linkedin"></i> www.linkedin.com/in/kimathi-sedegah-71b853360
+      </a>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
 </html>
